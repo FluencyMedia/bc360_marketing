@@ -19,3 +19,7 @@ local_dependency: {
 local_dependency: {
   project: "bc360_users"
 }
+
+local_dependency: {
+  project: "bc360_outcomes"
+}

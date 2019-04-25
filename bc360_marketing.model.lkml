@@ -5,6 +5,7 @@ include: "//bc360_admin/bc360_triggers.lkml"
 include: "//bc360_clients/*.view.lkml"
 include: "//bc360_services/*.view.lkml"
 include: "//bc360_campaigns/*.view.lkml"
+include: "//bc360_outcomes/*.view.lkml"
 # include: "//bc360_users/*.view.lkml"
 
 include: "*.view.lkml"
@@ -31,4 +32,5 @@ explore: arch_clients_admin {
     type: inner
     sql_on: ${arch_campaigns_admin.adgroup_id} = ${mx_marketing_base.adgroup_id} ;;
   }
+
 }
