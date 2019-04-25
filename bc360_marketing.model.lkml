@@ -33,4 +33,10 @@ explore: arch_clients_admin {
     sql_on: ${arch_campaigns_admin.adgroup_id} = ${mx_marketing_base.adgroup_id} ;;
   }
 
+  join: arch_outcomes_admin {
+    relationship: many_to_many
+    type: left_outer
+    sql_on: ${arch_outcomes_admin.outcome_tracker_id} = ${mx_marketing_base.outcome_tracker_id} ;;
+  }
+
 }
