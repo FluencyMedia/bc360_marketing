@@ -15,3 +15,7 @@ local_dependency: {
 local_dependency: {
   project: "bc360_campaigns"
 }
+
+local_dependency: {
+  project: "bc360_users"
+}
