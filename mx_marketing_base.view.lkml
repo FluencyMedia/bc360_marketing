@@ -1,5 +1,5 @@
 view: mx_marketing_base {
-  extension: required
+  # extension: required
 
   sql_table_name: mx_marketing.mx_marketing_base ;;
 
@@ -144,6 +144,16 @@ view: mx_marketing_base {
         sql: NULLIF(SUM(${TABLE}.impressions),0);;  }
 
 
+      measure: clicks_sum {
+        view_label: "5. Performance"
+        label: "# Clicks"
+
+        type: number
+        value_format_name: decimal_0
+
+        sql: NULLIF(SUM(${TABLE}.clicks),0);;  }
+
+
       measure: cost_sum {
         view_label: "5. Performance"
         label: "$ Cost"
@@ -228,139 +238,6 @@ view: mx_marketing_base {
           value_format_name: percent_2
 
           sql: 1.0*(${outcomes_sum}) / nullif(${clicks_sum},0) ;;  }
-
-        measure: o_referrals_num {
-          view_label: "Z - Metadata"
-          group_label: "Isolated Measures"
-          label: "= 'Referrals'"
-          description: "ISOLATED: Outcome Quality = 'Referrals'"
-
-          type: sum
-          sql: ${TABLE}.outcomes ;;
-          value_format_name: decimal_0
-
-          filters: {
-            field: arch_outcomes.outcome_quality
-            value: "Referrals"  }  }
-
-        measure: o_leads_num {
-          view_label: "Z - Metadata"
-          group_label: "Isolated Measures"
-          label: "= 'Leads'"
-          description: "ISOLATED: Outcome Quality = 'Leads'"
-
-          type: sum_distinct
-          sql: ${TABLE}.outcomes ;;
-          value_format_name: decimal_0
-
-          filters: {
-            field: arch_outcomes.outcome_quality
-            value: "Leads"    }  }
-
-        measure: o_outcomes_num {
-          view_label: "Z - Metadata"
-          group_label: "Isolated Measures"
-          label: "= 'Outcomes'"
-          description: "ISOLATED: Outcome Quality = 'Outcomes'"
-
-          type: sum
-          sql: ${TABLE}.outcomes ;;
-          value_format_name: decimal_0
-
-          filters: {
-            field: arch_outcomes.outcome_quality
-            value: "Outcomes" }  }
-
-        measure: leads_total {
-          view_label: "6. Outcomes"
-          label: ">= Leads"
-          description: "'# Leads' + '# Referrals"
-
-          drill_fields: [
-            drill_outcomes*,
-            drill_mx_outcomes*
-          ]
-
-          type: number
-          sql: ${o_leads_num} + ${o_referrals_num} ;;
-          value_format_name: decimal_0
-        }
-
-        measure: cpl {
-          view_label: "6. Outcomes"
-          label: "$ CPL"
-          description: "$ Cost / # Leads"
-
-          drill_fields: [
-            drill_outcomes*
-          ]
-
-          type: number
-          value_format_name: usd
-
-          sql: 1.0*(${cost_sum}) / nullif(${leads_total},0) ;;  }
-
-        measure: ltr {
-          view_label: "6. Outcomes"
-          label: "% Leads"
-          description: "# Leads / # Clicks"
-
-          type: number
-          value_format_name: percent_2
-
-          sql: 1.0*(${leads_total}) / nullif(${clicks_sum},0) ;;  }
-
-        measure: referrals_total {
-          view_label: "6. Outcomes"
-          label: "# Referrals"
-          description: "= '# Referrals'"
-
-          drill_fields: [
-            drill_outcomes*,
-            drill_mx_outcomes*
-          ]
-
-          type: number
-          sql: NULLIF(${o_referrals_num}, 0) ;;
-          value_format_name: decimal_0
-        }
-
-        measure: cpr {
-          view_label: "6. Outcomes"
-          label: "$ CPR"
-          description: "$ Cost / # Referrals"
-
-          drill_fields: [
-            drill_outcomes*
-          ]
-
-          type: number
-          value_format_name: usd
-
-          sql: 1.0*(${cost_sum}) / nullif(${referrals_total},0) ;;  }
-
-        measure: rtr {
-          view_label: "6. Outcomes"
-          label: "% Referrals"
-          description: "# Referrals / # Clicks"
-
-          type: number
-          value_format_name: percent_2
-
-          sql: 1.0*(${referrals_total}) / nullif(${clicks_sum},0) ;;  }
-
-
-
-        measure: avg_conv_score {
-          view_label: "6. Outcomes"
-          label: "Avg. Outcome Score"
-
-          type: average
-          value_format_name: decimal_1
-          sql: ${arch_outcomes.outcome_score} ;;  }
-
-        ##### }
-        ##### Calculated Measures
 
         ##########  MEASURES  }  ##########
       }

@@ -7,7 +7,7 @@ include: "//bc360_services/*.view.lkml"
 include: "//bc360_campaigns/*.view.lkml"
 # include: "//bc360_users/*.view.lkml"
 
-# include: "*.view.lkml"
+include: "*.view.lkml"
 
 label: "BC360 - Admin"
 
@@ -24,5 +24,11 @@ explore: arch_clients_admin {
     relationship: many_to_one
     type: inner
     sql_on: ${arch_campaigns_admin.service_line_code} = ${arch_services_admin.service_line_code} ;;
+  }
+
+  join: mx_marketing_base {
+    relationship: many_to_many
+    type: inner
+    sql_on: ${arch_campaigns_admin.adgroup_id} = ${mx_marketing_base.adgroup_id} ;;
   }
 }
