@@ -19,4 +19,10 @@ explore: arch_clients_admin {
     type: inner
     sql_on: ${arch_clients_admin.organization_uid} = ${arch_campaigns_admin.organization_uid} ;;
   }
+
+  join: arch_services_admin {
+    relationship: many_to_one
+    type: inner
+    sql_on: ${arch_campaigns_admin.service_line_code} = ${arch_services_admin.service_line_code} ;;
+  }
 }
