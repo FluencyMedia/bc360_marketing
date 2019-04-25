@@ -17,3 +17,7 @@ explore: arch_client_orgs {
     sql_on: ${arch_client_orgs.organization_id} = ${arch_campaigns.organization_id} ;;
   }
 }
+
+explore: arch_campaigns {
+  label: "CAMPAIGNS"
+}
