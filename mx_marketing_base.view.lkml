@@ -1,29 +1,7 @@
 view: mx_marketing_base {
   extension: required
 
-  derived_table: {
-    datagroup_trigger: dg_bc360_bq
-
-    sql:  SELECT
-            row_id,
-            date,
-            medium,
-            client_id,
-            adgroup_id,
-            adgroup_uid,
-            outcome_tracker_id,
-            outcome_tracker_uid,
-            creative_id,
-            criterion_id,
-            device,
-            impressions,
-            cost,
-            clicks,
-            outcomes,
-            outcomes_bulk
-          FROM bc360_mx_marketing.mx_marketing_master mxm;;
-
-    }
+  sql_table_name: mx_marketing.mx_marketing_base ;;
 
 ##########  METADATA    {
 
@@ -73,29 +51,6 @@ view: mx_marketing_base {
 
 
 ##########  DIMENSIONS  {
-
-##### Field Sets {
-    set: drill_outcomes {
-      fields: [
-        arch_programs.program,
-        arch_programs.service,
-        arch_outcomes.outcome_mechanism,
-        arch_outcomes.outcome_type
-      ]
-    }
-
-    set: drill_mx_outcomes {
-      fields: [
-        leads_total,
-        cost_sum,
-        cpl,
-        ltr
-      ]
-    }
-
-
-
-# } #####
 
 ##### Time Dimensions {
 
@@ -175,170 +130,6 @@ view: mx_marketing_base {
 
 ##### Time Dimensions } #####
 
-##### Creative Dimensions  {
-
-    dimension: creative {
-      view_label: "5. Creative"
-      label: "Creative"
-
-      type: string
-      sql:  ${TABLE}.creative;;
-    }
-
-
-##### Creative Dimensions } #####
-
-##### Channel Dimensions {
-
-    dimension: device {
-      view_label: "3. Channel"
-      label: "Device"
-
-      type: string
-
-      sql: ${TABLE}.device ;;  }
-
-    dimension: mode {
-      view_label: "3. Channel"
-      label: "Mode"
-
-      type: string
-
-      html: <font size="2">{{rendered_value}}</font> ;;
-
-      sql: ${TABLE}.mode ;;  }
-
-    dimension: final_url {
-      view_label: "3. Channel"
-      label: "Final URL"
-
-      type: string
-
-      sql: ${TABLE}.final_url ;;  }
-
-    dimension: subtype_codes_raw {
-      view_label: "7. Subtype Codes"
-      label: "Subtype List [RAW]"
-      description: "Exact 'subtypelist=' parameter string from incoming URL"
-
-      type: string
-
-      # Quick crappy hack to do this as a LookML dimension
-      # TODO: Needs to be processed and cached in source data
-      sql: split_part(split_part(split_part(${final_url},'?',2),'subtypelist=',2),'&',1) ;;
-    }
-
-    dimension: subtype_codes_str {
-      view_label: "7. Subtype Codes"
-      label: "Subtype List"
-      description: "Subtype List - Cleansed"
-
-      type: string
-
-      # Quick crappy hack to do this as a LookML dimension
-      # Needs to be processed and cached in source data
-      sql: replace(replace(replace(${subtype_codes_raw},'%20','X'),'HeartXScreeningXPPC','HeartXXScreeningXPPC'),'HVTScrn','HeartXXScreeningXEmail') ;;
-    }
-
-    dimension: subtype_codes {
-      view_label: "7. Subtype Codes"
-      label: "Subtype Codes"
-      description: "Subtypes as array of individual items"
-
-      type: string
-
-      # Quick crappy hack to do this as a LookML dimension
-      # Needs to be processed and cached in source data
-      sql: string_to_array(${subtype_codes_str},'X') ;;
-    }
-
-    dimension: sc_service {
-      view_label: "7. Subtype Codes"
-      label: "Subtype - Service"
-      description: "[SERVICE]XofferingXtopicXmedium"
-
-      type: string
-
-      sql: ${subtype_codes}[1] ;;
-    }
-
-    dimension: sc_offering {
-      view_label: "7. Subtype Codes"
-      label: "Subtype - Offering"
-      description: "serviceX[OFFERING]XtopicXmedium"
-
-      type: string
-
-      sql: ${subtype_codes}[2] ;;
-    }
-
-    dimension: sc_topic {
-      view_label: "7. Subtype Codes"
-      label: "Subtype - Topic"
-      description: "serviceXofferingX[TOPIC]Xmedium"
-
-      type: string
-
-      sql: ${subtype_codes}[3] ;;
-    }
-
-    dimension: sc_medium {
-      view_label: "7. Subtype Codes"
-      label: "Subtype - Medium"
-      description: "serviceXofferingXtopicX[MEDIUM]"
-
-      type: string
-
-      sql: ${subtype_codes}[4] ;;
-    }
-
-##### Channel Dimensions } #####
-
-##### Dynamic Dimensions  {
-
-    dimension: rel_medium_mode {
-      view_label: "3. Channel"
-      group_label: "Relative Dimensions"
-      label: "{% if ${arch_program.medium}._is_filtered %}
-      [Mode]
-      {% else %}
-      [Medium]
-      {% endif %}"
-
-      type: string
-
-      sql:  {% if ${arch_program.medium}._is_filtered %}
-                ${mode}
-              {% else %}
-                ${arch_program.medium}
-              {% endif %};;
-
-      }
-
-      parameter: font_size {
-        view_label: "Z - Metadata"
-
-        type: number
-        allowed_value: {
-          label: "Small"
-          value: "1"
-        }
-        allowed_value: {
-          label: "Medium"
-          value: "2"
-        }
-        allowed_value: {
-          label: "Large"
-          value: "2"
-        }
-      }
-
-      ##### Dynamic Dimensions } #####
-
-      ##########  DIMENSIONS  }  ##########
-
-
-
       ##########  MEASURES   {
 
       ##### Base Measures {
@@ -352,61 +143,6 @@ view: mx_marketing_base {
 
         sql: NULLIF(SUM(${TABLE}.impressions),0);;  }
 
-      measure: impr_pct {
-        view_label: "5. Performance"
-        group_label: "Interim Measures"
-        label: "% Impressions"
-
-        hidden: yes
-
-        type: percent_of_total
-        direction: "column"
-        value_format_name: decimal_1
-
-        sql: ${impr_sum};;  }
-
-      measure: clicks_sum {
-        view_label: "5. Performance"
-        label: "# Clicks"
-
-        type: number
-        value_format_name: decimal_0
-
-        sql: NULLIF(SUM(${TABLE}.clicks),0);;
-
-      }
-
-      measure: clicks_sum_sub {
-        view_label: "5. Performance"
-        label: "# Clicks (Subtotals)"
-
-        type: number
-        value_format_name: decimal_0
-
-        sql: ${clicks_sum};;
-
-        html: {% if subtotal_over.row_type_description._value == 'SUBTOTAL' %}
-                    <div style="
-                      background: rgba(70, 130, 180, 0.4);
-                      width: 100%;
-                      height: 20px;
-                      padding: 3px 3px 1px;
-                      border-bottom: 1px solid black;
-                      margin:18px 0 0 0;
-                      font-size: 110%;
-                    ">
-                      <b><span>{{ rendered_value }}</span></b>
-                    </div>
-                  {% else %}
-                    <div style="
-                      width: 100%;
-                      padding: 3px 3px 1px;
-                      font-size: 105%;
-                    ">
-                      {{ rendered_value }}
-                    </div>
-                  {% endif %};;
-      }
 
       measure: cost_sum {
         view_label: "5. Performance"
@@ -454,30 +190,6 @@ view: mx_marketing_base {
         value_format_name: percent_2
 
         sql: 1.0*(${clicks_sum}) / nullif(${impr_sum},0) ;;  }
-
-      measure: ctr_bar {
-        view_label: "5. Performance"
-        label: "% CTR [BAR]"
-
-        type: number
-        value_format_name: percent_1
-
-        html:
-        <div style="float: left
-        ; width:50%
-        ; text-align:right
-        ; margin-right: 4px"> <p>{{rendered_value}}</p>
-        </div>
-        <div style="float: left
-        ; width:{{ value | times:50}}%
-        ; background-color: rgba(0,180,0,{{ value | times:100 }})
-        ; text-align:left
-        ; color: #FFFFFF
-        ; border-radius: 2px"> <p style="margin-bottom: 0; margin-left: 4px;"> &nbsp; </p>
-        </div>
-        ;;
-
-          sql: 1.0*(${clicks_sum}) / nullif(${impr_sum},0) ;;  }
 
         measure: cpc {
           view_label: "5. Performance"
