@@ -8,16 +8,14 @@ include: "//bc360_campaigns/*.view.lkml"
 
 # include: "*.view.lkml"
 
-explore: arch_client_orgs {
+label: "BC360 - Admin"
+
+explore: arch_clients_admin {
   label: "BC360 - Marketing [ADMIN]"
 
   join: arch_campaigns_admin {
     relationship: one_to_many
     type: inner
-    sql_on: ${arch_client_orgs.organization_uid} = ${arch_campaigns_admin.organization_uid} ;;
+    sql_on: ${arch_clients_admin.organization_uid} = ${arch_campaigns_admin.organization_uid} ;;
   }
-}
-
-explore: arch_campaigns {
-  label: "CAMPAIGNS"
 }
