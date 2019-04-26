@@ -18,8 +18,7 @@ explore: arch_clients_admin {
   join: arch_campaigns_admin {
     relationship: one_to_many
     type: inner
-    # TODO: Work out why '_uid' fields aren't lining up
-    sql_on: ${arch_clients_admin.organization_id} = ${arch_campaigns_admin.organization_id} ;;
+    sql_on: ${arch_clients_admin.organization_uid} = ${arch_campaigns_admin.organization_uid} ;;
   }
 
   join: arch_services_admin {
