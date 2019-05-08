@@ -50,7 +50,7 @@ view: mx_marketing_base {
       can_filter: no
       hidden: yes
 
-      type: string
+      type: number
 
       sql: ${TABLE}.outcome_tracker_id ;;  }
 
