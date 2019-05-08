@@ -3,7 +3,13 @@ include: "//bc360_outcomes/*.view"
 view: mx_marketing_base {
   # extension: required
 
-  sql_table_name: mx_marketing.mx_marketing_base ;;
+  derived_table: {
+    sql:  SELECT
+            ROW_NUMBER() OVER () row_id,
+            *
+          FROM `bc360-main.mx_marketing.mx_marketing_base`  ;;
+  }
+
 
 ##########  METADATA    {
 
@@ -31,7 +37,7 @@ view: mx_marketing_base {
       can_filter: no
       hidden: yes
 
-      type: string
+      type: number
 
       sql: ${TABLE}.row_id ;;  }
 
