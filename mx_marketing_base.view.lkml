@@ -7,7 +7,7 @@ view: mx_marketing_base {
     sql:  SELECT
             ROW_NUMBER() OVER () row_id,
             *
-          FROM `bc360-main.mx_marketing.mx_marketing_base`  ;;
+          FROM `bc360-main.flat_mx.mx_marketing_master_hour`  ;;
   }
 
 
