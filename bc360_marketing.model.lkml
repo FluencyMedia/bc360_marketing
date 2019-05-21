@@ -10,7 +10,7 @@ include: "//bc360_outcomes/*.view.lkml"
 
 include: "*.view.lkml"
 
-label: "BC360 - Admin"
+label: "BC360 - MAIN"
 
 explore: bc360_mx_main {
   from: arch_clients_admin
