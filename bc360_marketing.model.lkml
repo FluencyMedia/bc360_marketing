@@ -34,13 +34,3 @@ explore: bc360_mx_main {
     sql_on: ${mx_marketing.outcome_tracker_id} = ${arch_outcomes_admin.outcome_tracker_id} ;;
   }
 }
-
-explore: mx_marketing_base {
-  label: "BC360 - Metrics [ADMIN]"
-
-  join: arch_outcomes_admin {
-    relationship: many_to_one
-    type: left_outer
-    sql_on: ${arch_outcomes_admin.outcome_tracker_id} = ${mx_marketing_base.outcome_tracker_id} ;;
-  }
-}
