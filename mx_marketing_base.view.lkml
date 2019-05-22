@@ -17,7 +17,10 @@ view: mx_marketing_base {
              CAST(cost AS FLOAT64) cost,
              CAST(clicks AS INT64) clicks,
              CAST(outcomes AS INT64) outcomes,
-             CAST(outcomes_bulk AS INT64) outcomes_bulk
+             CAST(outcomes_bulk AS INT64) outcomes_bulk,
+             CAST(hour_of_day AS INT64) hour_of_day,
+             CAST(time_of_day AS STRING) time_of_day,
+             CAST(day_of_month AS INT64) day_of_month
           FROM flat_mx.mx_marketing_master_hour mxm;;
 
     }
