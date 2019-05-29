@@ -11,7 +11,7 @@ view: mx_marketing_base {
              CAST(date AS DATE) date,
              CAST(medium AS STRING) medium,
              CAST(adgroup_id AS INT64) adgroup_id,
-             CAST(outcome_tracker_id AS STRING) outcome_tracker_id,
+             CAST(outcome_tracker_id AS INT64) outcome_tracker_id,
              CAST(device AS STRING) device,
              CAST(impressions AS INT64) impressions,
              CAST(cost AS FLOAT64) cost,
