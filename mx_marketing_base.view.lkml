@@ -4,7 +4,7 @@ view: mx_marketing_base {
   # extension: required
 
   derived_table: {
-    # datagroup_trigger: dg_bc360_bq
+    datagroup_trigger: dg_bc360_mx_flat
 
     sql:  SELECT
             ROW_NUMBER() OVER () row_id,
@@ -14,6 +14,8 @@ view: mx_marketing_base {
              CAST(outcome_tracker_id AS INT64) outcome_tracker_id,
              CAST(device AS STRING) device,
              CAST(impressions AS INT64) impressions,
+             CAST(impressions_available AS INT64) impressions_available,
+             CAST(impressions_bulk AS INT64) impressions_bulk,
              CAST(cost AS FLOAT64) cost,
              CAST(clicks AS INT64) clicks,
              CAST(outcomes AS INT64) outcomes,
@@ -428,18 +430,26 @@ view: mx_marketing_base {
 
       sql: NULLIF(SUM(${TABLE}.impressions),0);;  }
 
+    measure: impr_avail {
+      view_label: "7. Opportunity"
+      label: "# Impressions Available"
+
+      type: sum
+      value_format_name: decimal_0
+
+      sql: ${TABLE}.impressions_available ;;
+    }
+
     measure: impr_pct {
-      view_label: "5. Performance"
-      group_label: "Interim Measures"
-      label: "% Impressions"
+      view_label: "7. Opportunity"
+      label: "% Impression Share"
 
-      hidden: yes
+      hidden: no
 
-      type: percent_of_total
-      direction: "column"
-      value_format_name: decimal_1
+      type: number
+      value_format_name: percent_1
 
-      sql: ${impr_sum};;  }
+      sql: 1.0*(${impr_sum}) / nullif(${impr_avail},0);;  }
 
     measure: clicks_sum {
       view_label: "5. Performance"
