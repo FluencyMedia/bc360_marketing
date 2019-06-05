@@ -695,11 +695,11 @@ view: mx_marketing_base {
 
         sql: 1.0*(${cost_sum}) / nullif(${referrals_total},0) ;;  }
 
-      measure: referrals_per_thousand {
+      measure: rpm {
 
         view_label: "6. Outcomes"
-        label: "$ Purchase Power"
-        description: "# Referrals / $ Cost (x1K): 'Bigger is Better' counterpart to 'Cost per Referral'"
+        label: "$ RPM"
+        description: "# Referrals / $1K: 'Bigger is Better' counterpart to 'Cost per Referral'"
 
         type: number
         value_format_name: decimal_1
