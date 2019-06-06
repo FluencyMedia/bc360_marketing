@@ -14,7 +14,7 @@ label: "BC360 - ALL CLIENTS"
 
 explore: bc360_mx_main {
   from: arch_clients_admin
-  label: "BC360 - Master [MAIN]"
+  label: "All Clients - PPC/Display Combined"
 
   join: arch_campaigns_admin {
     relationship: one_to_many
