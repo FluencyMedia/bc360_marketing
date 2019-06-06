@@ -462,38 +462,6 @@ view: mx_marketing_base {
 
     }
 
-    measure: clicks_sum_sub {
-      view_label: "5. Performance"
-      label: "# Clicks (Subtotals)"
-
-      type: number
-      value_format_name: decimal_0
-
-      sql: ${clicks_sum};;
-
-      html: {% if subtotal_over.row_type_description._value == 'SUBTOTAL' %}
-                    <div style="
-                      background: rgba(70, 130, 180, 0.4);
-                      width: 100%;
-                      height: 20px;
-                      padding: 3px 3px 1px;
-                      border-bottom: 1px solid black;
-                      margin:18px 0 0 0;
-                      font-size: 110%;
-                    ">
-                      <b><span>{{ rendered_value }}</span></b>
-                    </div>
-                  {% else %}
-                    <div style="
-                      width: 100%;
-                      padding: 3px 3px 1px;
-                      font-size: 105%;
-                    ">
-                      {{ rendered_value }}
-                    </div>
-                  {% endif %};;
-    }
-
     measure: cost_sum {
       view_label: "5. Performance"
       label: "$ Cost"
