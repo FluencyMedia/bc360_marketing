@@ -134,7 +134,7 @@ view: mx_marketing_base {
       label: "# Days"
 
       can_filter: no
-      hidden: no
+      hidden: yes
 
       type: count_distinct
       value_format_name: decimal_0
