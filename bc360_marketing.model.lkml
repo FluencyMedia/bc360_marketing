@@ -10,11 +10,11 @@ include: "//bc360_outcomes/*.view.lkml"
 
 include: "*.view.lkml"
 
-label: "BC360 - ALL CLIENTS"
+label: "BC360 - All Clients"
 
 explore: bc360_mx_main {
   from: arch_clients_admin
-  label: "All Clients - PPC/Display Combined"
+  label: "BC360 - Digital Marketing"
 
   join: arch_campaigns {
     relationship: one_to_many
