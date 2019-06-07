@@ -295,6 +295,8 @@ view: mx_marketing_base {
       view_label: "5. Creative"
       label: "Creative"
 
+      hidden: yes
+
       type: string
       sql:  ${TABLE}.creative;;
     }
@@ -318,7 +320,7 @@ view: mx_marketing_base {
 
       type: string
 
-      html: <font size="2">{{rendered_value}}</font> ;;
+      # html: <font size="2">{{rendered_value}}</font> ;;
 
       sql: ${TABLE}.mode ;;  }
 
@@ -326,6 +328,7 @@ view: mx_marketing_base {
       view_label: "3. Channel"
       label: "Final URL"
 
+      hidden: yes
       type: string
 
       sql: ${TABLE}.final_url ;;  }
@@ -335,6 +338,7 @@ view: mx_marketing_base {
       label: "Subtype List [RAW]"
       description: "Exact 'subtypelist=' parameter string from incoming URL"
 
+      hidden: yes
       type: string
 
       # Quick crappy hack to do this as a LookML dimension
@@ -347,6 +351,7 @@ view: mx_marketing_base {
       label: "Subtype List"
       description: "Subtype List - Cleansed"
 
+      hidden: yes
       type: string
 
       # Quick crappy hack to do this as a LookML dimension
@@ -359,6 +364,7 @@ view: mx_marketing_base {
       label: "Subtype Codes"
       description: "Subtypes as array of individual items"
 
+      hidden: yes
       type: string
 
       # Quick crappy hack to do this as a LookML dimension
@@ -371,6 +377,7 @@ view: mx_marketing_base {
       label: "Subtype - Service"
       description: "[SERVICE]XofferingXtopicXmedium"
 
+      hidden: yes
       type: string
 
       sql: ${subtype_codes}[1] ;;
@@ -381,6 +388,7 @@ view: mx_marketing_base {
       label: "Subtype - Offering"
       description: "serviceX[OFFERING]XtopicXmedium"
 
+      hidden: yes
       type: string
 
       sql: ${subtype_codes}[2] ;;
@@ -391,6 +399,7 @@ view: mx_marketing_base {
       label: "Subtype - Topic"
       description: "serviceXofferingX[TOPIC]Xmedium"
 
+      hidden: yes
       type: string
 
       sql: ${subtype_codes}[3] ;;
@@ -401,6 +410,7 @@ view: mx_marketing_base {
       label: "Subtype - Medium"
       description: "serviceXofferingXtopicX[MEDIUM]"
 
+      hidden: yes
       type: string
 
       sql: ${subtype_codes}[4] ;;
@@ -434,6 +444,7 @@ view: mx_marketing_base {
       view_label: "7. Opportunity"
       label: "# Impressions Available"
 
+      hidden: yes
       type: sum
       value_format_name: decimal_0
 
@@ -444,8 +455,7 @@ view: mx_marketing_base {
       view_label: "7. Opportunity"
       label: "% Impression Share"
 
-      hidden: no
-
+      hidden: yes
       type: number
       value_format_name: percent_1
 
@@ -476,7 +486,7 @@ view: mx_marketing_base {
       group_label: "Z - Reference"
       label: "# Outcomes"
 
-      hidden: no
+      hidden: yes
 
       type: number
       value_format_name: decimal_0
@@ -488,7 +498,7 @@ view: mx_marketing_base {
       group_label: "Z - Reference"
       label: "# Outcomes (Bulk)"
 
-      hidden: no
+      hidden: yes
 
       type: number
       value_format_name: decimal_0
@@ -513,6 +523,7 @@ view: mx_marketing_base {
       view_label: "5. Performance"
       label: "% CTR [BAR]"
 
+      hidden: yes
       type: number
       value_format_name: percent_1
 
@@ -556,6 +567,7 @@ view: mx_marketing_base {
         label: "$ CPO"
         description: "Cost / Outcome"
 
+        hidden: yes
         type: number
         value_format_name: usd
 
@@ -566,6 +578,7 @@ view: mx_marketing_base {
         label: "% OTR"
         description: "Outcomes / Clicks"
 
+        hidden: yes
         type: number
         value_format_name: percent_2
 
@@ -577,6 +590,7 @@ view: mx_marketing_base {
         label: "= 'Referrals'"
         description: "ISOLATED: Outcome Quality = 'Referrals'"
 
+        hidden: yes
         type: sum
         sql: ${TABLE}.outcomes ;;
         value_format_name: decimal_0
@@ -591,6 +605,7 @@ view: mx_marketing_base {
         label: "= 'Leads'"
         description: "ISOLATED: Outcome Quality = 'Leads'"
 
+        hidden: yes
         type: sum_distinct
         sql: ${TABLE}.outcomes ;;
         value_format_name: decimal_0
@@ -605,6 +620,7 @@ view: mx_marketing_base {
         label: "= 'Outcomes'"
         description: "ISOLATED: Outcome Quality = 'Outcomes'"
 
+        hidden: yes
         type: sum
         sql: ${TABLE}.outcomes ;;
         value_format_name: decimal_0
@@ -618,6 +634,7 @@ view: mx_marketing_base {
         label: ">= Leads"
         description: "'# Leads' + '# Referrals"
 
+        hidden: yes
         type: number
         sql: ${o_leads_num} + ${o_referrals_num} ;;
         value_format_name: decimal_0
@@ -628,6 +645,7 @@ view: mx_marketing_base {
         label: "$ CPL"
         description: "$ Cost / # Leads"
 
+        hidden: yes
         type: number
         value_format_name: usd
 
@@ -638,6 +656,7 @@ view: mx_marketing_base {
         label: "% Leads"
         description: "# Leads / # Clicks"
 
+        hidden: yes
         type: number
         value_format_name: percent_2
 
@@ -690,6 +709,7 @@ view: mx_marketing_base {
         view_label: "6. Outcomes"
         label: "Avg. Outcome Score"
 
+        hidden: yes
         type: average
         value_format_name: decimal_1
         sql: ${arch_outcomes_admin.outcome_score} ;;  }

@@ -16,16 +16,16 @@ explore: bc360_mx_main {
   from: arch_clients_admin
   label: "All Clients - PPC/Display Combined"
 
-  join: arch_campaigns_admin {
+  join: arch_campaigns {
     relationship: one_to_many
     type: left_outer
-    sql_on: ${bc360_mx_main.organization_id} = ${arch_campaigns_admin.organization_id} ;;
+    sql_on: ${bc360_mx_main.organization_id} = ${arch_campaigns.organization_id} ;;
   }
 
   join: mx_marketing {
     relationship: one_to_many
     type: inner
-    sql_on: ${arch_campaigns_admin.adgroup_id} = ${mx_marketing.adgroup_id} ;;
+    sql_on: ${arch_campaigns.adgroup_id} = ${mx_marketing.adgroup_id} ;;
   }
 
   join: arch_outcomes_admin {
