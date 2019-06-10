@@ -314,16 +314,6 @@ view: mx_marketing_base {
 
       sql: ${TABLE}.device ;;  }
 
-    dimension: mode {
-      view_label: "3. Channel"
-      label: "Mode"
-
-      type: string
-
-      # html: <font size="2">{{rendered_value}}</font> ;;
-
-      sql: ${TABLE}.mode ;;  }
-
     dimension: final_url {
       view_label: "3. Channel"
       label: "Final URL"
