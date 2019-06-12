@@ -19,8 +19,8 @@ view: mx_marketing {
   measure: impr_avail { hidden: yes }
   measure: oucomes_bulk_sum { hidden: yes }
   measure: ctr_bar { hidden: yes }
-  measure: o_referrals_num { hidden: yes }
-  measure: o_leads_num { hidden: yes }
-  measure: o_outcomes_num { hidden: yes }
+  measure: o_referrals_num { hidden: no }
+  measure: o_leads_num { hidden: no }
+  measure: o_outcomes_num { hidden: no }
   measure: avg_conv_score { hidden: yes }
 }

@@ -473,15 +473,15 @@ view: mx_marketing_base {
 
     measure: outcomes_sum {
       view_label: "6. Outcomes"
-      group_label: "Z - Reference"
+      # group_label: "Z - Reference"
       label: "# Outcomes"
 
-      hidden: yes
+      hidden: no
 
-      type: number
+      type: sum
       value_format_name: decimal_0
 
-      sql: NULLIF(SUM(${TABLE}.outcomes), 0);;  }
+      sql: ${TABLE}.outcomes ;;  }
 
     measure: outcomes_bulk_sum {
       view_label: "6. Outcomes"
@@ -557,7 +557,7 @@ view: mx_marketing_base {
         label: "$ CPO"
         description: "Cost / Outcome"
 
-        hidden: yes
+        hidden: no
         type: number
         value_format_name: usd
 
@@ -568,7 +568,7 @@ view: mx_marketing_base {
         label: "% OTR"
         description: "Outcomes / Clicks"
 
-        hidden: yes
+        hidden: no
         type: number
         value_format_name: percent_2
 
@@ -580,7 +580,7 @@ view: mx_marketing_base {
         label: "= 'Referrals'"
         description: "ISOLATED: Outcome Quality = 'Referrals'"
 
-        hidden: yes
+        hidden: no
         type: sum
         sql: ${TABLE}.outcomes ;;
         value_format_name: decimal_0
@@ -595,9 +595,9 @@ view: mx_marketing_base {
         label: "= 'Leads'"
         description: "ISOLATED: Outcome Quality = 'Leads'"
 
-        hidden: yes
-        type: sum_distinct
-        sql: ${TABLE}.outcomes ;;
+        hidden: no
+        type: sum
+        sql: ${TABLE}.outcomes_bulk ;;
         value_format_name: decimal_0
 
         filters: {
@@ -610,7 +610,7 @@ view: mx_marketing_base {
         label: "= 'Outcomes'"
         description: "ISOLATED: Outcome Quality = 'Outcomes'"
 
-        hidden: yes
+        hidden: no
         type: sum
         sql: ${TABLE}.outcomes ;;
         value_format_name: decimal_0
@@ -624,7 +624,7 @@ view: mx_marketing_base {
         label: ">= Leads"
         description: "'# Leads' + '# Referrals"
 
-        hidden: yes
+        hidden: no
         type: number
         sql: ${o_leads_num} + ${o_referrals_num} ;;
         value_format_name: decimal_0
@@ -635,7 +635,7 @@ view: mx_marketing_base {
         label: "$ CPL"
         description: "$ Cost / # Leads"
 
-        hidden: yes
+        hidden: no
         type: number
         value_format_name: usd
 
@@ -646,7 +646,7 @@ view: mx_marketing_base {
         label: "% Leads"
         description: "# Leads / # Clicks"
 
-        hidden: yes
+        hidden: no
         type: number
         value_format_name: percent_2
 
