@@ -4,7 +4,7 @@ include: "mx_marketing_base.view"
 view: mx_marketing {
   extends: [mx_marketing_base]
 
-  dimension: adgroup_id { hidden: yes }
+  dimension: adgroup_id { hidden: no }
   dimension: outcome_tracker_id { hidden: yes }
   dimension: row_id { hidden: yes }
   dimension: final_url { hidden: yes }
