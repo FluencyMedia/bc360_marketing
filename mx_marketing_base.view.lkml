@@ -312,7 +312,22 @@ view: mx_marketing_base {
 
       type: string
 
-      sql: ${TABLE}.device ;;  }
+      case: {
+        when: {
+          sql: ${TABLE}.device = "HIGH_END_MOBILE" ;;
+          label: "Mobile"
+        }
+        when: {
+          sql: ${TABLE}.device = "DESKTOP" ;;
+          label: "Desktop"
+        }
+        when: {
+          sql: ${TABLE}.device = "TABLET" ;;
+          label: "Tablet"
+        }
+        else: "[Unknown Device]"
+      }
+    }
 
     dimension: final_url {
       view_label: "3. Channel"
