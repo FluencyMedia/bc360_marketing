@@ -14,6 +14,7 @@ include: "//bc360_outcomes/**/*.view.lkml"
 # include: "//bc360_users/**/*.view.lkml"
 
 include: "*.view.lkml"
+include: "/**/*.view.lkml"
 
 label: "BC360 - All Clients"
 
