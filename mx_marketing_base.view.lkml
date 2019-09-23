@@ -22,7 +22,7 @@ view: mx_marketing_base {
              CAST(outcomes_bulk AS INT64) outcomes_bulk,
              CAST(hour AS INT64) hour
           FROM flat_mx.mx_marketing_master_hour mxm;;
-
+    partition_keys: ["date"]
     }
 
 ##########  METADATA    {
@@ -165,6 +165,24 @@ view: mx_marketing_base {
       sql: ${TABLE}.hour ;;
     }
 
+    dimension: month_of_year_index {
+      view_label: "4. Timeframes"
+      group_item_label: "Month of Year - INDEX"
+      type: number
+      hidden: yes
+      value_format_name: decimal_0
+
+      sql: EXTRACT(MONTH FROM ${TABLE}.date) ;;
+    }
+
+    dimension: month_of_year {
+      view_label: "4. Timeframes"
+      group_item_label: "Month of Year"
+      type: string
+
+      sql: FORMAT_DATE("%B", ${TABLE}.date) ;;
+      order_by_field: month_of_year_index
+    }
 
 
     dimension: day_of_month {
