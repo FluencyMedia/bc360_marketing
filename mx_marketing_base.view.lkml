@@ -506,15 +506,14 @@ view: mx_marketing_base {
 
     measure: outcomes_sum {
       view_label: "6. Outcomes"
-      # group_label: "Z - Reference"
       label: "# Outcomes"
 
       hidden: no
 
-      type: sum
+      type: number
       value_format_name: decimal_0
 
-      sql: ${TABLE}.outcomes ;;  }
+      sql: NULLIF(SUM(${TABLE}.outcomes, 0)) ;;  }
 
     measure: outcomes_bulk_sum {
       view_label: "6. Outcomes"
