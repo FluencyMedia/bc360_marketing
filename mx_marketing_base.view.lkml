@@ -14,8 +14,8 @@ view: mx_marketing_base {
              CAST(outcome_tracker_id AS INT64) outcome_tracker_id,
              CAST(device AS STRING) device,
              CAST(impressions AS INT64) impressions,
-             CAST(impressions_available AS INT64) impressions_available,
-             CAST(impressions_bulk AS INT64) impressions_bulk,
+             CAST(NULL AS INT64) impressions_available,
+             CAST(NULL AS INT64) impressions_bulk,
              CAST(cost AS FLOAT64) cost,
              CAST(clicks AS INT64) clicks,
              CAST(outcomes AS INT64) outcomes,
@@ -513,7 +513,7 @@ view: mx_marketing_base {
       type: number
       value_format_name: decimal_0
 
-      sql: NULLIF(SUM(${TABLE}.outcomes, 0)) ;;  }
+      sql: NULLIF(SUM(${TABLE}.outcomes), 0) ;;  }
 
     measure: outcomes_bulk_sum {
       view_label: "6. Outcomes"
