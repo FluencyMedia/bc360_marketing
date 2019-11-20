@@ -89,6 +89,9 @@ view: mx_marketing_base {
 
       timeframes: [
         raw,
+        hour,
+        hour_of_day,
+        hour6,
         date,
         day_of_week_index,
         day_of_week,
