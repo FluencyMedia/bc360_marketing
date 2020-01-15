@@ -17,7 +17,7 @@ view: mx_marketing {
   dimension: sc_medium { hidden: yes }
 
   measure: impr_avail { hidden: yes }
-  measure: oucomes_bulk_sum { hidden: yes }
+  measure: outcomes_bulk_sum { hidden: yes }
   measure: ctr_bar { hidden: yes }
   measure: o_referrals_num { hidden: no }
   measure: o_leads_num { hidden: no }
