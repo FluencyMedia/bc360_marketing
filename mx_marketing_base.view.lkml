@@ -599,10 +599,10 @@ view: mx_marketing_base {
         sql: 1.0*(${cost_sum}) / nullif(${outcomes_sum},0) ;;  }
 
 
-      measure: rpo {
+      measure: opc {
 
         view_label: "6. Outcomes"
-        label: "$ RPO"
+        label: "$ OPC"
         description: "# Outcomes / $1K: 'Bigger is Better' inversion of 'Cost per Outcome'"
 
         type: number
@@ -688,16 +688,16 @@ view: mx_marketing_base {
 
         sql: 1.0*(${cost_sum}) / nullif(${leads_total},0) ;;  }
 
-      measure: rpl {
+      measure: lpc {
 
         view_label: "6. Outcomes"
-        label: "$ RPL"
+        label: "$ LPC"
         description: "# Leads / $1K: 'Bigger is Better' inversion of 'Cost per Lead'"
 
         type: number
         value_format_name: decimal_1
 
-        sql: 1000.0*(${referrals_total}) / nullif(${cost_sum},0) ;;}
+        sql: 1000.0*(${leads_total}) / nullif(${cost_sum},0) ;;}
 
       measure: ltr {
         view_label: "6. Outcomes"
