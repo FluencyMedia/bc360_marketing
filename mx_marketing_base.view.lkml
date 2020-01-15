@@ -598,6 +598,18 @@ view: mx_marketing_base {
 
         sql: 1.0*(${cost_sum}) / nullif(${outcomes_sum},0) ;;  }
 
+
+      measure: rpo {
+
+        view_label: "6. Outcomes"
+        label: "$ RPO"
+        description: "# Outcomes / $1K: 'Bigger is Better' inversion of 'Cost per Outcome'"
+
+        type: number
+        value_format_name: decimal_1
+
+        sql: 1000.0*(${outcomes_sum}) / nullif(${cost_sum},0) ;;}
+
       measure: otr {
         view_label: "6. Outcomes"
         label: "% OTR"
@@ -676,6 +688,17 @@ view: mx_marketing_base {
 
         sql: 1.0*(${cost_sum}) / nullif(${leads_total},0) ;;  }
 
+      measure: rpl {
+
+        view_label: "6. Outcomes"
+        label: "$ RPL"
+        description: "# Leads / $1K: 'Bigger is Better' inversion of 'Cost per Lead'"
+
+        type: number
+        value_format_name: decimal_1
+
+        sql: 1000.0*(${referrals_total}) / nullif(${cost_sum},0) ;;}
+
       measure: ltr {
         view_label: "6. Outcomes"
         label: "% Leads"
@@ -739,10 +762,10 @@ view: mx_marketing_base {
         value_format_name: decimal_1
         sql: ${arch_outcomes_admin.outcome_score} ;;  }
 
-      ##### }
-      ##### Calculated Measures
+    ##### }
+  ##### Calculated Measures
 
-      ##########  MEASURES  }  ##########
+  ##########  MEASURES  }  ##########
 
 
 
