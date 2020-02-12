@@ -471,10 +471,10 @@ view: mx_marketing_base {
       label: "# Impressions Available"
 
       hidden: yes
-      type: sum
+      type: number
       value_format_name: decimal_0
 
-      sql: ${TABLE}.impressions_available ;;
+      sql: NULLIF(SUM(${TABLE}.impressions_available),0) ;;
     }
 
     measure: impr_pct {
