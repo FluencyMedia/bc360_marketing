@@ -28,6 +28,12 @@ explore: bc360_mx_main {
     sql_on: ${bc360_mx_main.organization_id} = ${arch_campaigns.organization_id} ;;
   }
 
+  join: arch_financials {
+    relationship: one_to_many
+    type: left_outer
+    sql_on: ${arch_campaigns.service_line_code} = ${arch_financials.service_line_code} ;;
+  }
+
   join: mx_marketing {
     relationship: one_to_many
     type: inner
@@ -39,4 +45,5 @@ explore: bc360_mx_main {
     type: left_outer
     sql_on: ${mx_marketing.outcome_tracker_id} = ${arch_outcomes_admin.outcome_tracker_id} ;;
   }
+
 }
