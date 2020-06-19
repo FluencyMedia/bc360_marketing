@@ -28,11 +28,11 @@ explore: bc360_mx_main {
     sql_on: ${bc360_mx_main.organization_id} = ${arch_campaigns.organization_id} ;;
   }
 
-  join: arch_financials {
-    relationship: one_to_many
-    type: left_outer
-    sql_on: ${arch_campaigns.service_line_code} = ${arch_financials.service_line_code} ;;
-  }
+#  join: arch_financials {
+#    relationship: one_to_many
+#    type: left_outer
+#    sql_on: ${arch_campaigns.service_line_code} = ${arch_financials.service_line_code} ;;
+#  }
 
   join: mx_marketing {
     relationship: one_to_many
