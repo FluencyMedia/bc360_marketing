@@ -35,7 +35,7 @@ view: pop_01_base {
     label: "WTD"
     view_label: "_PoP"
     type: yesno
-    sql:  (EXTRACT(DAYOFWEEK FROM ${date_raw}) >= EXTRACT(DAYOFWEEK FROM CURRENT_DATE())) ;;
+    sql:  (EXTRACT(DAYOFWEEK FROM ${date_raw}) < EXTRACT(DAYOFWEEK FROM CURRENT_DATE())) ;;
   }
 
   dimension: mtd_only {
@@ -43,7 +43,7 @@ view: pop_01_base {
     label: "MTD"
     view_label: "_PoP"
     type: yesno
-    sql:  (EXTRACT(DAYOFMONTH FROM ${date_raw}) >= EXTRACT(DAYOFMONTH FROM CURRENT_DATE())) ;;
+    sql:  (EXTRACT(DAYOFMONTH FROM ${date_raw}) < EXTRACT(DAYOFMONTH FROM CURRENT_DATE())) ;;
   }
 
   dimension: ytd_only {
@@ -51,7 +51,7 @@ view: pop_01_base {
     label: "YTD"
     view_label: "_PoP"
     type: yesno
-    sql:  (EXTRACT(DAYOFYEAR FROM ${date_raw}) >= EXTRACT(DAYOFYEAR FROM CURRENT_DATE())) ;;
+    sql:  (EXTRACT(DAYOFYEAR FROM ${date_date}) < EXTRACT(DAYOFYEAR FROM CURRENT_DATE())) ;;
   }
 
   measure: count {
