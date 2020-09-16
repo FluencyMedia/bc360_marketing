@@ -1,4 +1,4 @@
-include: "//bc360_outcomes/*.view"
+include: "//bc360_outcomes/**/*.view"
 
 view: mx_marketing_base {
   # extension: required
@@ -89,14 +89,18 @@ view: mx_marketing_base {
 
       timeframes: [
         raw,
-        hour,
+        time,
         hour_of_day,
-        hour6,
         date,
-        day_of_week_index,
         day_of_week,
+        day_of_week_index,
+        day_of_month,
+        day_of_year,
         week,
+        week_of_year,
         month,
+        month_name,
+        month_num,
         quarter,
         year
       ]
@@ -753,14 +757,14 @@ view: mx_marketing_base {
 
 
 
-      measure: avg_conv_score {
-        view_label: "6. Outcomes"
-        label: "Avg. Outcome Score"
-
-        hidden: yes
-        type: average
-        value_format_name: decimal_1
-        sql: ${arch_outcomes_admin.outcome_score} ;;  }
+        #measure: avg_conv_score {
+        #  view_label: "6. Outcomes"
+        #  label: "Avg. Outcome Score"
+        #
+        #  hidden: yes
+        #  type: average
+        #  value_format_name: decimal_1
+        #  sql: ${arch_outcomes_admin.outcome_score} ;;  }
 
     ##### }
   ##### Calculated Measures
