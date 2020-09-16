@@ -41,14 +41,14 @@ explore: bc360_mx_main {
 
 }
 
-explore: bc360_mx_pop {
+explore: bc360_mx_pop_01 {
   from: arch_clients_admin
-  label: "BC360 - Dig Mkting - PoP 01"
+  label: "BC360 - DM - PoP 01"
 
   join: arch_campaigns {
     relationship: one_to_many
     type: left_outer
-    sql_on: ${bc360_mx_pop.organization_id} = ${arch_campaigns.organization_id} ;;
+    sql_on: ${bc360_mx_pop_01.organization_id} = ${arch_campaigns.organization_id} ;;
   }
 
   join: mx_marketing {
