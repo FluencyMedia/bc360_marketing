@@ -59,11 +59,12 @@ view: pop_01_base {
     type: count
     hidden: yes
   }
+
   measure: total_cost {
     label: "Total Cost"
     view_label: "_PoP"
-    type: number
-    sql: ${cost_sum} ;;
+    type: sum
+    sql: ${TABLE}.cost ;;
     value_format_name: usd
     drill_fields: [date_date]
   }
