@@ -582,6 +582,16 @@ view: mx_marketing_base {
 
         sql: 1.0*(${cost_sum}) / nullif(${clicks_sum},0) ;;  }
 
+      measure: cpcost {
+        view_label: "5. Performance"
+        label: "$ Clicks/Cost"
+        description: "# Clicks / $1K: 'Bigger is Better' inversion of 'Cost per Outcome'"
+
+        type: number
+        value_format_name: usd
+
+        sql: 1000.0*(${clicks_sum}) / nullif(${cost_sum},0);; }
+
       measure: cpm {
         view_label: "5. Performance"
         label: "$ CPM"
@@ -590,6 +600,16 @@ view: mx_marketing_base {
         value_format_name: usd
 
         sql: 1.0*(${cost_sum}) / nullif((${impr_sum}/1000),0) ;;  }
+
+      measure: mpc {
+        view_label: "5. Performance"
+        label: "$ MPC"
+        description: "# Impressions / $1K: 'Bigger is Better' inversion of 'Cost per Outcome'"
+        hidden: no
+        type: number
+        value_format_name: usd
+
+        sql: 1000.0*(${impr_sum}) / nullif(${cost_sum},0) ;;}
 
       measure: cpo {
         view_label: "6. Outcomes"
