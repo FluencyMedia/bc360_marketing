@@ -474,7 +474,7 @@ view: mx_marketing_base {
       view_label: "7. Opportunity"
       label: "# Impressions Available"
 
-      hidden: yes
+      hidden: no
       type: number
       value_format_name: decimal_0
 
@@ -485,7 +485,7 @@ view: mx_marketing_base {
       view_label: "7. Opportunity"
       label: "% Impression Share"
 
-      hidden: yes
+      hidden: no
       type: number
       value_format_name: percent_1
 

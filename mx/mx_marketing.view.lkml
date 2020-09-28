@@ -16,7 +16,7 @@ view: mx_marketing {
   dimension: sc_topic { hidden: yes }
   dimension: sc_medium { hidden: yes }
 
-  measure: impr_avail { hidden: yes }
+  measure: impr_avail { hidden: no }
   measure: outcomes_bulk_sum { hidden: yes }
   measure: ctr_bar { hidden: yes }
   measure: o_referrals_num { hidden: no }
