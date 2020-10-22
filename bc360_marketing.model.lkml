@@ -51,22 +51,22 @@ explore: bc360_mx_shares {
     sql_on: ${bc360_mx_shares.organization_id} = ${arch_campaigns.organization_id} ;;
   }
 
-  # join: mx_marketing {
-  #  relationship: one_to_many
-  #  type: inner
-  #  sql_on: ${arch_campaigns.adgroup_id} = ${mx_marketing.adgroup_id} ;;
-  # }
+  join: mx_marketing {
+   relationship: one_to_many
+   type: inner
+   sql_on: ${arch_campaigns.adgroup_id} = ${mx_marketing.adgroup_id} ;;
+  }
 
-  # join: arch_outcomes_admin {
-  #  relationship: many_to_one
-  #  type: left_outer
-  #  sql_on: ${mx_marketing.outcome_tracker_id} = ${arch_outcomes_admin.outcome_tracker_id} ;;
-  # }
+  join: arch_outcomes_admin {
+   relationship: many_to_one
+   type: left_outer
+   sql_on: ${mx_marketing.outcome_tracker_id} = ${arch_outcomes_admin.outcome_tracker_id} ;;
+  }
 
   join: mx_share_impr_click {
     relationship: one_to_many
-    type: inner
-    sql_on: (${arch_campaigns.adgroup_id} = ${mx_share_impr_click.adgroup_id}) ;;
+    type: left_outer
+    sql_on: ((${mx_marketing.adgroup_id} = ${mx_share_impr_click.adgroup_id}) AND (${mx_marketing.date_date} = ${mx_share_impr_click.date_date})) ;;
   }
 
 }
