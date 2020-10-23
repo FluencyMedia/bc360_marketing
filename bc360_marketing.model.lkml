@@ -39,6 +39,14 @@ explore: bc360_mx_main {
     sql_on: ${mx_marketing.outcome_tracker_id} = ${arch_outcomes_admin.outcome_tracker_id} ;;
   }
 
+  join: mx_share_impr_click {
+    relationship: one_to_many
+    type: left_outer
+
+    sql_on: ((${mx_marketing.adgroup_id} = ${mx_share_impr_click.adgroup_id})
+              AND (${mx_marketing.timestamp} = ${mx_share_impr_click.timestamp})) ;;
+  }
+
 }
 
 explore: bc360_mx_shares {
