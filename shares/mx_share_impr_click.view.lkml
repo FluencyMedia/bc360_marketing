@@ -144,6 +144,14 @@ view: mx_share_impr_click {
     sql: NULLIF(SUM(${TABLE}.avail_impr), 0) ;;
   }
 
+  measure: lost_impr {
+    label: "Lost Impressions"
+    type: number
+    value_format_name: decimal_0
+
+    sql: NULLIF((${avail_impr} - ${mx_marketing.impr_sum}), 0) ;;
+  }
+
   measure: avail_clicks_sum {
     label: "Available Clicks [SUM]"
     description: "Raw sum of 'avail_clicks' from DB"
@@ -161,6 +169,14 @@ view: mx_share_impr_click {
 
     sql: SAFE_DIVIDE(${mx_marketing.clicks_sum},${earned_share_click}) ;;
     }
+
+  measure: lost_clicks {
+    label: "Lost Clicks"
+    type: number
+    value_format_name: decimal_0
+
+    sql: NULLIF((${avail_clicks} - ${mx_marketing.clicks_sum}), 0) ;;
+  }
 
   measure: earned_share_impr {
     label: "Earned % - Impressions"
