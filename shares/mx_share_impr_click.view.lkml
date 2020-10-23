@@ -14,6 +14,7 @@ view: mx_share_impr_click {
             adgroup,
             date,
             hour,
+            timestamp,
             earned_impr,
             share_impr_search,
             avail_impr,
@@ -61,23 +62,47 @@ view: mx_share_impr_click {
    sql: ${TABLE}.adgroup_id ;;
  }
 
+  dimension: timestamp {
+    view_label: "Z - Metadata"
+    group_label: "Timestamps"
+    label: "Timestamp [SHARE]"
+    type: date_time
+    hidden: no
+    sql: ${TABLE}.timestamp ;;
+  }
+
   dimension_group: date {
     type: time
+    hidden: yes
     timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
+        raw,
+        time,
+        time_of_day,
+        hour_of_day,
+        date,
+        day_of_week,
+        day_of_week_index,
+        day_of_month,
+        day_of_year,
+        week,
+        week_of_year,
+        month,
+        month_name,
+        month_num,
+        quarter,
+        quarter_of_year,
+        year
     ]
     convert_tz: no
-    datatype: date
-    sql: ${TABLE}.date ;;
+    datatype: timestamp
+    sql: ${TABLE}.timestamp ;;
   }
 
   dimension: dim_share_click {
     label: "% Share - Clicks"
+    view_label: "Z - Metadata"
+    group_label: "Shares"
+
     type: number
     value_format_name: percent_1
 
@@ -86,12 +111,16 @@ view: mx_share_impr_click {
 
   measure: has_share_impr_search {
     label: "? Impr Share"
+    view_label: "Z - Metadata"
+    group_label: "Shares"
     type: yesno
 
     sql: ${count_shares_impr_search} > 0 ;;
   }
 
   measure: has_share_click {
+    view_label: "Z - Metadata"
+    group_label: "Shares"
     label: "? Click Share"
     type: yesno
 
@@ -100,6 +129,8 @@ view: mx_share_impr_click {
 
   dimension: dim_share_impr_search {
     label: "% Share - Impressions"
+    view_label: "Z - Metadata"
+    group_label: "Shares"
     type: number
     value_format_name: percent_1
 
@@ -109,7 +140,9 @@ view: mx_share_impr_click {
   measure: earned_impr_sum {
     label: "Earned - Impressions"
     description: "Raw sum of 'earned_impr' from DB"
-    group_label: "Z - Metadata"
+    view_label: "Z - Metadata"
+    group_label: "Shares"
+
     type: number
     value_format_name: decimal_0
 
@@ -119,7 +152,9 @@ view: mx_share_impr_click {
   measure: earned_clicks_sum {
     label: "Earned - Clicks"
     description: "Raw sum of 'earned_clicks' from DB"
-    group_label: "Z - Metadata"
+    view_label: "Z - Metadata"
+    group_label: "Shares"
+
     type: number
     value_format_name: decimal_0
 
@@ -137,7 +172,9 @@ view: mx_share_impr_click {
   measure: avail_impr_sum {
     label: "Available Impressions [SUM]"
     description: "Raw sum of 'avail_impr' from DB"
-    group_label: "Z - Metadata"
+    view_label: "Z - Metadata"
+    group_label: "Shares"
+
     type: number
     value_format_name: decimal_0
 
@@ -155,7 +192,9 @@ view: mx_share_impr_click {
   measure: avail_clicks_sum {
     label: "Available Clicks [SUM]"
     description: "Raw sum of 'avail_clicks' from DB"
-    group_label: "Z - Metadata"
+    view_label: "Z - Metadata"
+    group_label: "Shares"
+
     type: number
     value_format_name: decimal_0
 
@@ -195,6 +234,8 @@ view: mx_share_impr_click {
   }
 
   measure: count_shares_impr_search {
+    view_label: "Z - Metadata"
+    group_label: "Shares"
     label: "# Impression Shares"
     type: count_distinct
     value_format_name: decimal_0
@@ -203,6 +244,8 @@ view: mx_share_impr_click {
   }
 
   measure: count_shares_click {
+    view_label: "Z - Metadata"
+    group_label: "Shares"
     label: "# Click Shares"
     type: count_distinct
     value_format_name: decimal_0
@@ -211,6 +254,8 @@ view: mx_share_impr_click {
   }
 
   measure: count_campaigns {
+    view_label: "Z - Metadata"
+    group_label: "Shares"
     label: "# Campaigns"
     type: count_distinct
     value_format_name: decimal_0
@@ -220,6 +265,8 @@ view: mx_share_impr_click {
   }
 
   measure: count {
+    view_label: "Z - Metadata"
+    group_label: "Shares"
     label: "# Total Items"
     type: count
     value_format_name: decimal_0

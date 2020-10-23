@@ -66,10 +66,9 @@ explore: bc360_mx_shares {
   join: mx_share_impr_click {
     relationship: one_to_many
     type: left_outer
+
     sql_on: ((${mx_marketing.adgroup_id} = ${mx_share_impr_click.adgroup_id})
-                AND (${mx_marketing.date_date} = ${mx_share_impr_click.date_date})
-                AND (${mx_marketing.hour_of_day} = ${mx_share_impr_click.hour_of_day})
-                ) ;;
+                AND (${mx_marketing.timestamp} = ${mx_share_impr_click.timestamp})) ;;
   }
 
 }

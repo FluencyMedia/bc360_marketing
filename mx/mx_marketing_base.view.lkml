@@ -9,6 +9,7 @@ view: mx_marketing_base {
     sql:  SELECT
             ROW_NUMBER() OVER () row_id,
              CAST(date AS DATE) date,
+             timestamp,
              CAST(medium AS STRING) medium,
              CAST(adgroup_id AS INT64) adgroup_id,
              CAST(outcome_tracker_id AS INT64) outcome_tracker_id,
@@ -80,6 +81,15 @@ view: mx_marketing_base {
 
 ##### Time Dimensions {
 
+    dimension: timestamp {
+      view_label: "Z - Metadata"
+      group_label: "Timestamps"
+      label: "Timestamp [BASE]"
+      type: date_time
+      hidden: no
+      sql: ${TABLE}.timestamp ;;
+    }
+
     dimension_group: date {
       view_label: "4. Timeframes"
       label: "Timeframes"
@@ -106,8 +116,8 @@ view: mx_marketing_base {
       ]
 
       convert_tz: no
-      datatype: date
-      sql: ${TABLE}.date ;;  }
+      datatype: timestamp
+      sql: ${TABLE}.timestamp ;;  }
 
     measure: date_start {
       view_label: "4. Timeframes"
