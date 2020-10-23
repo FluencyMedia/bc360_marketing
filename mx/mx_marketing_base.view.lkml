@@ -33,6 +33,7 @@ view: mx_marketing_base {
       group_label: "Database IDs"
       label: "Ad Group ID [MX_Master]"
       description: "Foreign Key from master metrics table"
+      tags: ["metadata", "ids"]
 
       can_filter: no
       hidden: no
@@ -46,6 +47,7 @@ view: mx_marketing_base {
       group_label: "Database IDs"
       label: "Row ID [MX_Master]"
       description: "Unique row ID from master metrics table"
+      tags: ["metadata", "ids"]
 
       primary_key: yes
 
@@ -61,6 +63,7 @@ view: mx_marketing_base {
       group_label: "Database IDs"
       label: "Outcome Tracker ID [MX_Master]"
       description: "Outcome Tracker ID from master metrics table"
+      tags: ["metadata", "ids"]
 
       can_filter: no
       hidden: no
@@ -86,6 +89,7 @@ view: mx_marketing_base {
       group_label: "Timestamps"
       label: "Timestamp [BASE]"
       type: date_time
+      tags: ["metadata", "timeframes"]
       hidden: no
       sql: ${TABLE}.timestamp ;;
     }
@@ -94,7 +98,7 @@ view: mx_marketing_base {
       view_label: "4. Timeframes"
       label: "Timeframes"
       description: "Optional complex dimension for managing timeframes"
-
+      tags: ["metadata", "timeframes"]
       type: time
 
       timeframes: [
