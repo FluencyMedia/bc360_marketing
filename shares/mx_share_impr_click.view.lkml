@@ -1,6 +1,7 @@
 include: "//bc360_marketing/**/*.view"
 
 view: mx_share_impr_click {
+  label: "7. Opportunity"
 
   derived_table: {
     datagroup_trigger: dg_bc360_mx_flat
@@ -105,45 +106,68 @@ view: mx_share_impr_click {
     sql: ${TABLE}.share_impr_search ;;
   }
 
-  measure: earned_impr {
+  measure: earned_impr_sum {
     label: "Earned - Impressions"
+    description: "Raw sum of 'earned_impr' from DB"
+    group_label: "Z - Metadata"
     type: number
     value_format_name: decimal_0
 
     sql: NULLIF(SUM(${TABLE}.earned_impr),0) ;;
   }
 
-  measure: earned_clicks {
+  measure: earned_clicks_sum {
     label: "Earned - Clicks"
-    type: sum
+    description: "Raw sum of 'earned_clicks' from DB"
+    group_label: "Z - Metadata"
+    type: number
     value_format_name: decimal_0
 
-    sql: ${TABLE}.earned_clicks ;;
+    sql: NULLIF(SUM(${TABLE}.earned_clicks), 0) ;;
   }
-
 
   measure: avail_impr {
     label: "Available Impressions"
-    type: sum
+    type: number
     value_format_name: decimal_0
 
-    sql: ${TABLE}.avail_impr ;;
+    sql: SAFE_DIVIDE(${mx_marketing.impr_sum},${earned_share_impr}) ;;
+  }
+
+  measure: avail_impr_sum {
+    label: "Available Impressions [SUM]"
+    description: "Raw sum of 'avail_impr' from DB"
+    group_label: "Z - Metadata"
+    type: number
+    value_format_name: decimal_0
+
+    sql: NULLIF(SUM(${TABLE}.avail_impr), 0) ;;
+  }
+
+  measure: avail_clicks_sum {
+    label: "Available Clicks [SUM]"
+    description: "Raw sum of 'avail_clicks' from DB"
+    group_label: "Z - Metadata"
+    type: number
+    value_format_name: decimal_0
+
+    sql: NULLIF(SUM(${TABLE}.avail_clicks), 0) ;;
   }
 
   measure: avail_clicks {
     label: "Available Clicks"
-    type: sum
+    type: number
     value_format_name: decimal_0
 
-    sql: ${TABLE}.avail_clicks ;;
-  }
+    sql: SAFE_DIVIDE(${mx_marketing.clicks_sum},${earned_share_click}) ;;
+    }
 
   measure: earned_share_impr {
     label: "Earned % - Impressions"
     type: number
     value_format_name: percent_1
 
-    sql: SAFE_DIVIDE(${earned_impr},${avail_impr});;
+    sql: SAFE_DIVIDE(${earned_impr_sum},${avail_impr_sum});;
   }
 
   measure: earned_share_click {
@@ -151,7 +175,7 @@ view: mx_share_impr_click {
     type: number
     value_format_name: percent_1
 
-    sql: SAFE_DIVIDE(${earned_clicks},${avail_clicks});;
+    sql: SAFE_DIVIDE(${earned_clicks_sum},${avail_clicks_sum});;
   }
 
   measure: count_shares_impr_search {
