@@ -112,6 +112,7 @@ view: mx_marketing_base {
         month_name,
         month_num,
         quarter,
+        quarter_of_year,
         year
       ]
 
