@@ -12,13 +12,14 @@ view: mx_share_impr_click {
             adgroup_id,
             adgroup,
             date,
+            hour,
             earned_impr,
             share_impr_search,
             avail_impr,
             earned_clicks,
             share_click,
             avail_clicks,
-          FROM bc360-main.flat_mx.mx_share_impr_click_adgroup mxs;;
+          FROM bc360-main.flat_mx.mx_share_impr_click mxs;;
     partition_keys: ["date"]
   }
 
@@ -26,6 +27,12 @@ view: mx_share_impr_click {
     type: number
     primary_key: yes
     hidden: no
+  }
+
+  dimension: hour_of_day {
+    type: number
+    hidden: yes
+    sql: ${TABLE}.hour ;;
   }
 
   dimension: campaign {
