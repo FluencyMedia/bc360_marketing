@@ -28,7 +28,7 @@ view: mx_share_impr_click {
   dimension: row_id {
     type: number
     primary_key: yes
-    hidden: no
+    hidden: yes
   }
 
   dimension: hour_of_day {
@@ -38,12 +38,14 @@ view: mx_share_impr_click {
   }
 
   dimension: campaign {
+
     type: string
     hidden: yes
     sql: ${TABLE}.campaign ;;
   }
 
   dimension: campaign_id {
+    hidden: yes
     type: number
     value_format_name: id
 
@@ -71,33 +73,6 @@ view: mx_share_impr_click {
     sql: ${TABLE}.timestamp ;;
   }
 
-  dimension_group: date {
-    type: time
-    hidden: yes
-    timeframes: [
-        raw,
-        time,
-        time_of_day,
-        hour_of_day,
-        date,
-        day_of_week,
-        day_of_week_index,
-        day_of_month,
-        day_of_year,
-        week,
-        week_of_year,
-        month,
-        month_name,
-        month_num,
-        quarter,
-        quarter_of_year,
-        year
-    ]
-    convert_tz: no
-    datatype: timestamp
-    sql: ${TABLE}.timestamp ;;
-  }
-
   dimension: dim_share_click {
     label: "% Share - Clicks"
     view_label: "Z - Metadata"
@@ -111,6 +86,7 @@ view: mx_share_impr_click {
 
   measure: has_share_impr_search {
     label: "? Impr Share"
+    description: "Does row have click share data?"
     view_label: "Z - Metadata"
     group_label: "Shares"
     type: yesno
@@ -119,9 +95,10 @@ view: mx_share_impr_click {
   }
 
   measure: has_share_click {
+    label: "? Click Share"
+    description: "Does row have click share data?"
     view_label: "Z - Metadata"
     group_label: "Shares"
-    label: "? Click Share"
     type: yesno
 
     sql: ${count_shares_click} > 0 ;;
@@ -131,6 +108,8 @@ view: mx_share_impr_click {
     label: "% Share - Impressions"
     view_label: "Z - Metadata"
     group_label: "Shares"
+    hidden: yes
+
     type: number
     value_format_name: percent_1
 
@@ -138,7 +117,7 @@ view: mx_share_impr_click {
   }
 
   measure: earned_impr_sum {
-    label: "Earned - Impressions"
+    label: "* Impressions"
     description: "Raw sum of 'earned_impr' from DB"
     view_label: "Z - Metadata"
     group_label: "Shares"
@@ -150,7 +129,7 @@ view: mx_share_impr_click {
   }
 
   measure: earned_clicks_sum {
-    label: "Earned - Clicks"
+    label: "* Clicks"
     description: "Raw sum of 'earned_clicks' from DB"
     view_label: "Z - Metadata"
     group_label: "Shares"
@@ -162,15 +141,16 @@ view: mx_share_impr_click {
   }
 
   measure: avail_impr {
-    label: "Available Impressions"
+    label: "+ Impressions"
+    description: "Total Impressions Available: Total Impressions / Share of Impressions Earned"
     type: number
     value_format_name: decimal_0
 
-    sql: SAFE_DIVIDE(${mx_marketing.impr_sum},${earned_share_impr}) ;;
+    sql: SAFE_DIVIDE(${mx_marketing.impr_sum}, ${earned_share_impr}) ;;
   }
 
   measure: avail_impr_sum {
-    label: "Available Impressions [SUM]"
+    label: "! Impressions [SUM]"
     description: "Raw sum of 'avail_impr' from DB"
     view_label: "Z - Metadata"
     group_label: "Shares"
@@ -182,7 +162,8 @@ view: mx_share_impr_click {
   }
 
   measure: lost_impr {
-    label: "Lost Impressions"
+    label: "- Impressions"
+    description: "Lost Impressions: Total Impressions Available - Total Impressions"
     type: number
     value_format_name: decimal_0
 
@@ -190,7 +171,7 @@ view: mx_share_impr_click {
   }
 
   measure: avail_clicks_sum {
-    label: "Available Clicks [SUM]"
+    label: "! Clicks [SUM]"
     description: "Raw sum of 'avail_clicks' from DB"
     view_label: "Z - Metadata"
     group_label: "Shares"
@@ -202,15 +183,17 @@ view: mx_share_impr_click {
   }
 
   measure: avail_clicks {
-    label: "Available Clicks"
+    label: "+ Clicks"
+    description: "Total Clicks Available: Total Clicks / Share of Clicks Earned"
     type: number
     value_format_name: decimal_0
 
-    sql: SAFE_DIVIDE(${mx_marketing.clicks_sum},${earned_share_click}) ;;
+    sql: SAFE_DIVIDE(${mx_marketing.clicks_sum}, ${earned_share_click}) ;;
     }
 
   measure: lost_clicks {
-    label: "Lost Clicks"
+    label: "- Clicks"
+    description: "Lost Clicks: Total Clicks Available - Total Clicks"
     type: number
     value_format_name: decimal_0
 
@@ -218,25 +201,25 @@ view: mx_share_impr_click {
   }
 
   measure: earned_share_impr {
-    label: "Earned % - Impressions"
+    label: "% Earned - Impressions"
     type: number
     value_format_name: percent_1
 
-    sql: SAFE_DIVIDE(${earned_impr_sum},${avail_impr_sum});;
+    sql: SAFE_DIVIDE(${earned_impr_sum}, ${avail_impr_sum});;
   }
 
   measure: earned_share_click {
-    label: "Earned % - Clicks"
+    label: "% Earned - Clicks"
     type: number
     value_format_name: percent_1
 
-    sql: SAFE_DIVIDE(${earned_clicks_sum},${avail_clicks_sum});;
+    sql: SAFE_DIVIDE(${earned_clicks_sum}, ${avail_clicks_sum});;
   }
 
   measure: count_shares_impr_search {
     view_label: "Z - Metadata"
     group_label: "Shares"
-    label: "# Impression Shares"
+    label: "# rows with Impression Share data"
     type: count_distinct
     value_format_name: decimal_0
 
@@ -246,7 +229,7 @@ view: mx_share_impr_click {
   measure: count_shares_click {
     view_label: "Z - Metadata"
     group_label: "Shares"
-    label: "# Click Shares"
+    label: "# rows with Click Share data"
     type: count_distinct
     value_format_name: decimal_0
 
