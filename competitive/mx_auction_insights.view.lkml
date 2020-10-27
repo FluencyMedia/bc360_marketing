@@ -1,3 +1,5 @@
+include: "/**/*.view.lkml"
+
 view: mx_auction_insights {
   label: "8. Competitive Auction Insights"
 

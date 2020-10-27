@@ -59,7 +59,7 @@ explore: bc360_mx_main {
     type: left_outer
 
     sql_on: ((${mx_marketing.adgroup_id} = ${mx_auction_insights.adgroup_id})
-      AND (${mx_marketing.timestamp} = ${mx_auction_insights.timestamp}));;
+              AND (${mx_marketing.timestamp} = ${mx_auction_insights.timestamp}));;
   }
 
   join: fact_domains {
