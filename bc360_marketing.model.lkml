@@ -95,6 +95,13 @@ explore: bc360_mx_testbed {
               AND (${mx_marketing.timestamp} = ${mx_auction_insights.timestamp}));;
   }
 
+  join: fact_domains {
+    relationship: many_to_one
+    type: left_outer
+
+    sql_on: ${mx_auction_insights.url_display_domain} = ${fact_domains.domain} ;;
+  }
+
 }
 
 ###############################################

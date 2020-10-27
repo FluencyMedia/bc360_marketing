@@ -25,6 +25,8 @@ view: mx_auction_insights {
     label: "Competitor"
     type: string
 
+    # order_by_field: "overlap_search_num"
+
     sql: ${TABLE}.url_display_domain ;;
   }
 
