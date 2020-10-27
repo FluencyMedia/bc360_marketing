@@ -94,6 +94,14 @@ view: mx_share_impr_click {
     sql: ${count_shares_impr_search} > 0 ;;
   }
 
+  measure: opportunity_unmet {
+    label: "$ Unmet Opportunity"
+    type: number
+    value_format_name: usd_0
+
+    sql: ${mx_marketing.cpc} * ${lost_clicks} ;;
+  }
+
   measure: has_share_click {
     label: "? Click Share"
     description: "Does row have click share data?"
