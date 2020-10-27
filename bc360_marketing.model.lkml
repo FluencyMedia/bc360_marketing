@@ -5,6 +5,7 @@ include: "//bc360_clients/**/*.view.lkml"
 include: "//bc360_services/**/*.view.lkml"
 include: "//bc360_campaigns/**/*.view.lkml"
 include: "//bc360_outcomes/**/*.view.lkml"
+include: "//bc360_timeframes/**/*.view.lkml"
 # include: "//bc360_users/**/*.view.lkml"
 
 include: "/**/*.view.lkml"
@@ -49,14 +50,15 @@ explore: bc360_mx_main {
 
 }
 
-explore: bc360_mx_shares {
+explore: bc360_mx_testbed {
   from: arch_clients_admin
-  label: "BC360 - DM Shares"
+  label: "BC360 - DM Testbed"
+  hidden: no
 
   join: arch_campaigns {
     relationship: one_to_many
     type: left_outer
-    sql_on: ${bc360_mx_shares.organization_id} = ${arch_campaigns.organization_id} ;;
+    sql_on: ${bc360_mx_testbed.organization_id} = ${arch_campaigns.organization_id} ;;
   }
 
   join: mx_marketing {
@@ -71,12 +73,26 @@ explore: bc360_mx_shares {
    sql_on: ${mx_marketing.outcome_tracker_id} = ${arch_outcomes_admin.outcome_tracker_id} ;;
   }
 
+  join: arch_timeframes {
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${mx_marketing.timestamp} = ${arch_timeframes.timestamp} ;;
+  }
+
   join: mx_share_impr_click {
     relationship: one_to_many
     type: left_outer
 
     sql_on: ((${mx_marketing.adgroup_id} = ${mx_share_impr_click.adgroup_id})
                 AND (${mx_marketing.timestamp} = ${mx_share_impr_click.timestamp})) ;;
+  }
+
+  join: mx_auction_insights {
+    relationship: one_to_many
+    type: left_outer
+
+    sql_on: ((${mx_marketing.adgroup_id} = ${mx_auction_insights.adgroup_id})
+              AND (${mx_marketing.timestamp} = ${mx_auction_insights.timestamp}));;
   }
 
 }
