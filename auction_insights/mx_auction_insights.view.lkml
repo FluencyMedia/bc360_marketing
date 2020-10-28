@@ -1,7 +1,7 @@
 include: "/**/*.view.lkml"
 
 view: mx_auction_insights {
-  label: "8. Competitive Auction Insights"
+  label: "8. Auction Insights"
 
   derived_table: {
     datagroup_trigger: dg_bc360_mx_flat
@@ -15,17 +15,20 @@ view: mx_auction_insights {
   }
 
   dimension: avail_impr_search {
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "Available Impressions [AUCTION]"
     type: number
     value_format_name: decimal_0
-    hidden: no
+    hidden: yes
 
     sql: ${TABLE}.avail_impr_search ;;
   }
 
   dimension: url_display_domain {
-    label: "Competitor"
+    label: "Domain URL [AUCTION]"
     type: string
+    hidden: yes
 
     # order_by_field: "overlap_search_num"
 
@@ -75,7 +78,11 @@ view: mx_auction_insights {
   }
 
   measure: share_impr_search {
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "% Share - Impressions [AUCTION]"
+    hidden: yes
+
     type: number
     value_format_name: percent_1
 
@@ -88,7 +95,11 @@ view: mx_auction_insights {
   ####### AGGRETATE COUNT MEASURES { #######
 
   measure: impr_sum_client {
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "# Impressions - Client [AUCTION]"
+    hidden: yes
+
     type: number
     value_format_name: decimal_0
 
@@ -96,7 +107,8 @@ view: mx_auction_insights {
   }
 
   measure: outranking_search_num {
-    label: "# Outranking Search"
+    group_label: "Occurrences"
+    label: "# Outrankings"
     type: number
     value_format_name: decimal_0
 
@@ -104,7 +116,8 @@ view: mx_auction_insights {
   }
 
   measure: overlap_search_num {
-    label: "# Overlap Search"
+    group_label: "Occurrences"
+    label: "# Overlaps"
     type: number
     value_format_name: decimal_0
 
@@ -112,6 +125,7 @@ view: mx_auction_insights {
   }
 
   measure: page_top_abs_num {
+    group_label: "Occurrences"
     label: "# Page Top Abs"
     type: number
     value_format_name: decimal_0
@@ -120,6 +134,7 @@ view: mx_auction_insights {
   }
 
   measure: page_top_num {
+    group_label: "Occurrences"
     label: "# Page Top"
     type: number
     value_format_name: decimal_0
@@ -128,6 +143,7 @@ view: mx_auction_insights {
   }
 
   measure: position_above_num {
+    group_label: "Occurrences"
     label: "# Position Above"
     type: number
     value_format_name: decimal_0
@@ -136,7 +152,11 @@ view: mx_auction_insights {
   }
 
   measure: share_impr_search_numerator {
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "% Share - Numerator"
+    hidden: yes
+
     type: number
     value_format_name: decimal_0
 
@@ -144,7 +164,11 @@ view: mx_auction_insights {
     }
 
   measure: share_impr_search_denom {
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "100% Share Denominator"
+    hidden: yes
+
     type: number
     value_format_name: decimal_0
 
@@ -157,8 +181,11 @@ view: mx_auction_insights {
   ###### INDIVIDUAL ROW TALLY DIMENSIONS { #######
 
   dimension: position_above_num_dim {
-    group_label: "Row-level Tallies"
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "# Position Above [DIM]"
+    hidden: yes
+
     type: number
     value_format_name: decimal_0
 
@@ -166,8 +193,11 @@ view: mx_auction_insights {
   }
 
   dimension: impr_sum_client_dim {
-    group_label: "Row-level Tallies"
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "# Impressions - Client [DIM]"
+    hidden: yes
+
     value_format_name: decimal_0
 
     sql: ${TABLE}.impr_sum_client ;;
@@ -175,8 +205,11 @@ view: mx_auction_insights {
   }
 
   dimension: outranking_search_num_dim {
-    group_label: "Row-level Tallies"
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "# Outranking Search [DIM]"
+    hidden: yes
+
     type: number
     value_format_name: decimal_0
 
@@ -184,8 +217,11 @@ view: mx_auction_insights {
   }
 
   dimension: overlap_search_num_dim {
-    group_label: "Row-level Tallies"
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "# Overlap Search [DIM]"
+    hidden: yes
+
     type: number
     value_format_name: decimal_0
 
@@ -193,8 +229,11 @@ view: mx_auction_insights {
   }
 
   dimension: page_top_abs_num_dim {
-    group_label: "Row-level Tallies"
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "# Page Top Abs [DIM]"
+    hidden: yes
+
     type: number
     value_format_name: decimal_0
 
@@ -202,8 +241,11 @@ view: mx_auction_insights {
   }
 
   dimension: page_top_num_dim {
-    group_label: "Row-level Tallies"
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "# Page Top [DIM]"
+    hidden: yes
+
     type: number
     value_format_name: decimal_0
 
@@ -211,8 +253,11 @@ view: mx_auction_insights {
   }
 
   dimension: share_impr_search_denom_dim {
-    group_label: "Row-level Tallies"
+    view_label: "Z - Metadata"
+    group_label: "Auction Insights"
     label: "100% Share Denominator [DIM]"
+    hidden: yes
+
     type: number
     value_format_name: decimal_0
 
@@ -224,125 +269,154 @@ view: mx_auction_insights {
 
   ###### INDIVIDUAL RATE DIMENSIONS { ######
 
-  dimension: rate_overlap_search {
-    group_label: "Rates"
-    label: "% Overlap Search [DIM]"
-    type: number
-    value_format_name: percent_1
+    dimension: rate_overlap_search {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      label: "% Overlap Search [DIM]"
+      hidden: yes
 
-    sql: ${TABLE}.rate_overlap_search ;;
-  }
+      type: number
+      value_format_name: percent_1
 
-  dimension: rate_page_top {
-    group_label: "Rates"
-    label: "% Page Top [DIM]"
-    type: number
-    value_format_name: percent_1
+      sql: ${TABLE}.rate_overlap_search ;;
+    }
 
-    sql: ${TABLE}.rate_page_top ;;
-  }
+    dimension: rate_page_top {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      label: "% Page Top [DIM]"
+      hidden: yes
 
-  dimension: rate_page_top_abs {
-    group_label: "Rates"
-    label: "% Page Top - Abs [DIM]"
-    type: number
-    value_format_name: percent_1
+      type: number
+      value_format_name: percent_1
 
-    sql: ${TABLE}.rate_page_top_abs ;;
-  }
+      sql: ${TABLE}.rate_page_top ;;
+    }
 
-  dimension: rate_position_above {
-    group_label: "Rates"
-    label: "% Position Above [DIM]"
-    type: number
-    value_format_name: percent_1
+    dimension: rate_page_top_abs {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      label: "% Page Top - Abs [DIM]"
+      hidden: yes
 
-    sql: ${TABLE}.rate_position_above ;;
-  }
+      type: number
+      value_format_name: percent_1
+
+      sql: ${TABLE}.rate_page_top_abs ;;
+    }
+
+    dimension: rate_position_above {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      label: "% Position Above [DIM]"
+      hidden: yes
+
+      type: number
+      value_format_name: percent_1
+
+      sql: ${TABLE}.rate_position_above ;;
+    }
 
 
-  dimension: share_impr_search_dim {
-    group_label: "Rates"
-    label: "% Share - Search [DIM]"
-    type: number
-    value_format_name: percent_1
+    dimension: share_impr_search_dim {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      label: "% Share - Search [DIM]"
+      hidden: yes
 
-    sql: ${TABLE}.share_impr_search ;;
-  }
+      type: number
+      value_format_name: percent_1
 
-  dimension: share_outranking_search {
-    group_label: "Rates"
-    label: "% Share - Outranking Search [DIM]"
-    type: number
-    value_format_name: percent_1
+      sql: ${TABLE}.share_impr_search ;;
+    }
 
-    sql: ${TABLE}.share_outranking_search ;;
-  }
+    dimension: share_outranking_search {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      label: "% Share - Outranking Search [DIM]"
+      hidden: yes
+
+      type: number
+      value_format_name: percent_1
+
+      sql: ${TABLE}.share_outranking_search ;;
+    }
 
   ###### INDIVIDUAL RATE DIMENSIONS } ######
 
 
   ###### METADATA { ######
 
-  dimension: row_id {
-    label: "Row ID [AUCTION]"
-    group_label: "Z - Metadata"
-    primary_key: yes
-    hidden: no
-    value_format_name: id
+    dimension: row_id {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      label: "Row ID [AUCTION]"
+      primary_key: yes
+      hidden: yes
+      value_format_name: id
 
-    sql: ${TABLE}.row_id ;;
-  }
+      sql: ${TABLE}.row_id ;;
+    }
 
-  dimension: adgroup_id {
-    label: "Adgroup ID [AUCTION]"
-    group_label: "Z - Metadata"
-    type: number
-    value_format_name: id
-    hidden: yes
+    dimension: adgroup_id {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      label: "Adgroup ID [AUCTION]"
+      type: number
+      value_format_name: id
+      hidden: yes
 
-    sql: ${TABLE}.adgroup_id ;;
-  }
+      sql: ${TABLE}.adgroup_id ;;
+    }
 
-  dimension: campaign {
-    label: "Campaign [AUCTION]"
-    type: string
-    hidden: yes
+    dimension: campaign {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      label: "Campaign [AUCTION]"
+      type: string
+      hidden: yes
 
-    sql: ${TABLE}.campaign ;;
-  }
+      sql: ${TABLE}.campaign ;;
+    }
 
-  dimension: campaign_id {
-    label: "Campaign ID [AUCTION]"
-    type: number
-    value_format_name: id
-    hidden: yes
+    dimension: campaign_id {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      label: "Campaign ID [AUCTION]"
+      type: number
+      value_format_name: id
+      hidden: yes
 
-    sql: ${TABLE}.campaign_id ;;
-  }
+      sql: ${TABLE}.campaign_id ;;
+    }
 
-  dimension: timestamp {
-    label: "Timestamp [AUCTION]"
-    type: date_time
+    dimension: timestamp {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      label: "Timestamp [AUCTION]"
+      type: date_time
+      hidden: yes
 
-    sql: ${TABLE}.timestamp ;;
-  }
+      sql: ${TABLE}.timestamp ;;
+    }
 
-  dimension_group: date {
-    type: time
-    hidden: yes
-    timeframes: [
-      raw,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    convert_tz: no
-    datatype: date
-    sql: ${TABLE}.date ;;
-  }
+    dimension_group: date {
+      view_label: "Z - Metadata"
+      group_label: "Auction Insights"
+      type: time
+      hidden: yes
+      timeframes: [
+        raw,
+        date,
+        week,
+        month,
+        quarter,
+        year
+      ]
+      convert_tz: no
+      datatype: date
+      sql: ${TABLE}.date ;;
+    }
 
   ###### METADATA } ######
 

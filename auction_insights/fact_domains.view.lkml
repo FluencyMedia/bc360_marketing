@@ -1,5 +1,5 @@
 view: fact_domains {
-  label: "8. Competitive Auction Insights"
+  label: "8. Auction Insights"
   sql_table_name: `bc360-main.flat_mx.fact_domains`
     ;;
 
