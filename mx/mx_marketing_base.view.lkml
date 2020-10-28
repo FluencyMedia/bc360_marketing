@@ -485,27 +485,6 @@ view: mx_marketing_base {
 
       sql: NULLIF(SUM(${TABLE}.impressions),0);;  }
 
-    measure: impr_avail {
-      view_label: "7. Opportunity"
-      label: "# Impressions Available"
-
-      hidden: no
-      type: number
-      value_format_name: decimal_0
-
-      sql: NULLIF(SUM(${TABLE}.impressions_available),0) ;;
-    }
-
-    measure: impr_pct {
-      view_label: "7. Opportunity"
-      label: "% Impression Share"
-
-      hidden: no
-      type: number
-      value_format_name: percent_1
-
-      sql: 1.0*(${impr_sum}) / nullif(${impr_avail},0);;  }
-
     measure: clicks_sum {
       view_label: "5. Performance"
       label: "# Clicks"
