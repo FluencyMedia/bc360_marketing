@@ -25,14 +25,14 @@ view: fact_domains {
 
   dimension: domain_status_scl {
     group_label: "Domain Statuses"
-    label: "Domain Category [BH]"
+    label: "Domain Category [SCL]"
     type: string
     sql: ${TABLE}.domain_status_scl ;;
   }
 
   dimension: domain_status_ufh {
     group_label: "Domain Statuses"
-    label: "Domain Category [BH]"
+    label: "Domain Category [UFH]"
     type: string
     sql: ${TABLE}.domain_status_ufh ;;
   }
