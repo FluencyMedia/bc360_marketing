@@ -6,8 +6,29 @@ view: fact_domains {
   dimension: domain {
     label: "  Domain"
     type: string
-    primary_key: yes
+
+    link: {
+      label: "{{ value }}"
+      url: "http://{{ value }}"
+      icon_url: "http://{{ value }}/favicon.ico"
+      }
+
     sql: ${TABLE}.domain ;;
+  }
+
+  dimension: domain_orig {
+    label: "Domain [ORIGINAL]"
+    description: "Raw domain from Ads (not aggregated into main domain)"
+    type: string
+    primary_key: yes
+
+    link: {
+      label: "{{ value }}"
+      url: "http://{{ value }}"
+      icon_url: "http://{{ value }}/favicon.ico"
+    }
+
+    sql: ${TABLE}.domain_orig ;;
   }
 
   dimension: domain_category {
