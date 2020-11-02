@@ -330,7 +330,7 @@ view: mx_share_impr_click {
       label: "# Total Items"
       type: count
       value_format_name: decimal_0
-      hidden: yes
+      hidden: no
     }
 
   ####### BASIC COUNTS } #######
