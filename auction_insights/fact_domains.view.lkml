@@ -12,6 +12,7 @@ view: fact_domains {
 
   dimension: domain_category {
     label: "  Domain Category"
+    description: "Healthcare System | Specialty Clinic | Pharmaceutical ..."
     type: string
     sql: IFNULL(${TABLE}.domain_category, "Other") ;;
   }
@@ -39,6 +40,7 @@ view: fact_domains {
 
   dimension: domain_status {
     label: "  Domain Status"
+    description: "Competitor | Other ..."
     type: string
     sql: COALESCE(${domain_status_bh}, ${domain_status_scl}, ${domain_status_ufh}, "Other") ;;
   }
