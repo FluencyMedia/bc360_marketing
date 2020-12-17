@@ -501,7 +501,7 @@ view: mx_marketing_base {
       label: "$ Cost"
 
       type: number
-      value_format_name: usd_0
+      value_format_name: usd
 
       sql: NULLIF(SUM(${TABLE}.cost), 0);; }
 
