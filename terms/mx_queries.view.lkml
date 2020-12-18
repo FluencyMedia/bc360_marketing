@@ -1,4 +1,6 @@
 view: mx_queries {
+  view_label: "9. Terms"
+
   sql_table_name: `bc360-main.mx_terms.mx_queries`
     ;;
 
@@ -52,22 +54,9 @@ view: mx_queries {
     sql: ${TABLE}.query_match_type ;;
   }
 
-  dimension_group: timestamp {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+  dimension: timestamp {
+    type: date_time
     sql: ${TABLE}.timestamp ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
 }

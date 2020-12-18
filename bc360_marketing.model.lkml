@@ -69,6 +69,22 @@ explore: bc360_mx_main {
     sql_on: ${mx_auction_insights.url_display_domain} = ${fact_domains.domain} ;;
   }
 
+  join: mx_queries {
+    relationship: many_to_many
+    type: left_outer
+
+    sql_on: ((${mx_marketing.adgroup_id} = ${mx_queries.adgroup_id})
+              AND (${mx_marketing.timestamp}) = ${mx_queries.timestamp} );;
+  }
+
+  join: fact_keywords {
+    relationship: many_to_one
+    type: left_outer
+
+    sql_on: ((${mx_queries.adgroup_id} = ${fact_keywords.adgroup_id})
+              AND (${mx_queries.criterion_id}) = ${fact_keywords.criterion_id} );;
+  }
+
 }
 
 explore: bc360_mx_testbed {

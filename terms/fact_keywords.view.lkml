@@ -1,6 +1,7 @@
 view: fact_keywords {
-  sql_table_name: `bc360-main.mx_terms.fact_keywords`
-    ;;
+  view_label: "9. Terms"
+  sql_table_name: `bc360-main.mx_terms.fact_keywords` ;;
+
 
   dimension: account_id {
     type: number
@@ -10,6 +11,11 @@ view: fact_keywords {
   dimension: adgroup_id {
     type: number
     sql: ${TABLE}.adgroup_id ;;
+  }
+
+  dimension: criterion_id {
+    type: number
+    sql: ${TABLE}.criterion_id ;;
   }
 
   dimension: bid_source_cpc {
