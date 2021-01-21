@@ -1,12 +1,30 @@
 view: fact_keywords {
   view_label: "9. Terms"
-  sql_table_name: `bc360-main.mx_terms.fact_keywords` ;;
+  # sql_table_name: `bc360-main.mx_terms.fact_keywords` ;;
+
+  derived_table: {
+    datagroup_trigger: dg_bc360_mx_flat
+
+    sql:  SELECT
+            ROW_NUMBER() OVER () row_id,
+            *
+          FROM  `bc360-main.mx_terms.fact_keywords`
+    ;;
+  }
 
 
   dimension: account_id {
     hidden: yes
     type: number
     sql: ${TABLE}.account_id ;;
+  }
+
+  dimension: row_id {
+    hidden: yes
+    type: number
+    primary_key: yes
+
+    sql: ${TABLE}.row_id ;;
   }
 
   dimension: adgroup_id {
@@ -81,7 +99,7 @@ view: fact_keywords {
   }
 
   dimension: quality_score {
-    hidden: yes
+    hidden: no
     type: number
     sql: ${TABLE}.quality_score ;;
   }
@@ -105,8 +123,10 @@ view: fact_keywords {
   }
 
   dimension: urls_final {
-    hidden: yes
+    label: "URL [KW]"
+    hidden: no
     type: string
+
     sql: ${TABLE}.urls_final ;;
   }
 

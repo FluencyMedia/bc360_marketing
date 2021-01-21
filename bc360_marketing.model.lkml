@@ -78,10 +78,10 @@ explore: bc360_mx_main {
   }
 
   join: fact_keywords {
-    relationship: many_to_one
+    relationship: many_to_many
     type: left_outer
 
-    sql_on: ((${mx_queries.adgroup_id} = ${fact_keywords.adgroup_id})
+    sql_on: ((${mx_marketing.adgroup_id} = ${fact_keywords.adgroup_id})
               AND (${mx_queries.criterion_id}) = ${fact_keywords.criterion_id} );;
   }
 
