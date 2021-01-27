@@ -54,6 +54,13 @@ explore: bc360_mx_main {
     sql_on: ${mx_marketing.timestamp} = ${arch_timeframes.timestamp} ;;
   }
 
+  join: arch_timeframe_windows {
+    relationship: one_to_many
+    type: full_outer
+    sql_on: ${arch_timeframe_windows.timestamp} = ${arch_timeframes.timestamp} AND
+            ${arch_timeframe_windows.client_id} = ${bc360_mx_main.client_id};;
+  }
+
   join: mx_auction_insights {
     relationship: one_to_many
     type: left_outer
