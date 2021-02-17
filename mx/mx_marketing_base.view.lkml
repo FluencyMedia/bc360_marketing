@@ -90,14 +90,15 @@ view: mx_marketing_base {
       label: "Timestamp [BASE]"
       type: date_time
       tags: ["metadata", "timeframes"]
-      hidden: no
+      hidden: yes
       sql: ${TABLE}.timestamp ;;
     }
 
     dimension_group: date {
-      view_label: "4. Timeframes"
+      view_label: "4. Timeframes [LEGACY]"
       label: "Timeframes"
       description: "Optional complex dimension for managing timeframes"
+      hidden: yes
       tags: ["metadata", "timeframes"]
       type: time
 
@@ -125,24 +126,27 @@ view: mx_marketing_base {
       sql: ${TABLE}.timestamp ;;  }
 
     measure: date_start {
-      view_label: "4. Timeframes"
+      view_label: "4. Timeframes [LEGACY]"
       label: "Start Date"
+      hidden: yes
 
       type: date
 
       sql: CAST(MIN(${date_date}) AS DATE) ;;  }
 
     measure: date_end {
-      view_label: "4. Timeframes"
+      view_label: "4. Timeframes [LEGACY]"
       label: "End Date"
+      hidden: yes
 
       type: date
 
       sql: CAST(MAX(${date_date}) AS DATE) ;;  }
 
     measure: date_diff {
-      view_label: "4. Timeframes"
+      view_label: "4. Timeframes [LEGACY]"
       label: "Duration - Days"
+      hidden: yes
 
       type: number
       value_format_name: decimal_0
@@ -165,9 +169,10 @@ view: mx_marketing_base {
     }
 
     dimension: year_str {
-      view_label: "4. Timeframes"
+      view_label: "4. Timeframes [LEGACY]"
       label: "Year [LABEL]"
       description: "'Year' as a string dimension for charts"
+      hidden: yes
 
       can_filter: no
 
@@ -177,9 +182,10 @@ view: mx_marketing_base {
     }
 
     dimension: hour_of_day {
-      view_label: "4. Timeframes"
+      view_label: "4. Timeframes [LEGACY]"
       label: "Hour of Day"
       description: "0 - 23: To use as hidden sort index for 'time_of_day'"
+      hidden: yes
 
       type: number
       value_format_name: decimal_0
@@ -188,7 +194,7 @@ view: mx_marketing_base {
     }
 
     dimension: month_of_year_index {
-      view_label: "4. Timeframes"
+      view_label: "4. Timeframes [LEGACY]"
       group_item_label: "Month of Year - INDEX"
       type: number
       hidden: yes
@@ -198,8 +204,10 @@ view: mx_marketing_base {
     }
 
     dimension: month_of_year {
-      view_label: "4. Timeframes"
+      view_label: "4. Timeframes [LEGACY]"
       group_item_label: "Month of Year"
+      hidden: yes
+
       type: string
 
       sql: FORMAT_DATE("%B", ${TABLE}.date) ;;
@@ -208,8 +216,9 @@ view: mx_marketing_base {
 
 
     dimension: day_of_month {
-      view_label: "4. Timeframes"
+      view_label: "4. Timeframes [LEGACY]"
       label: "Day of Month"
+      hidden: yes
       description: "1 - 30/31: Numeric Day of Month"
 
       type: number
@@ -219,9 +228,10 @@ view: mx_marketing_base {
     }
 
     dimension: time_of_day {
-      view_label: "4. Timeframes"
+      view_label: "4. Timeframes [LEGACY]"
       label: "Time of Day"
       description: "'Midnight' - '6AM' - 'Noon'"
+      hidden: yes
 
       type: string
 
