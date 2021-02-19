@@ -19,6 +19,7 @@ view: mx_marketing_base {
              CAST(NULL AS INT64) impressions_bulk,
              CAST(cost AS FLOAT64) cost,
              CAST(clicks AS INT64) clicks,
+             CAST(views AS INT64) views,
              CAST(outcomes AS INT64) outcomes,
              CAST(outcomes_bulk AS INT64) outcomes_bulk,
              CAST(hour AS INT64) hour
@@ -537,6 +538,20 @@ view: mx_marketing_base {
       value_format_name: decimal_0
 
       sql: NULLIF(SUM(${TABLE}.outcomes_bulk), 0);;  }
+
+    measure: views_sum {
+      view_label: "5. Performance"
+      label: "# Views"
+      description: "Total views for video campaigns"
+
+      hidden: no
+
+      type: number
+      value_format_name: decimal_0
+
+      sql: NULLIF(SUM(${TABLE}.views), 0) ;;
+
+    }
 
     ##### }
     ##### End Base Measures
