@@ -65,4 +65,14 @@ view: fact_domains {
     type: string
     sql: COALESCE(${domain_status_bh}, ${domain_status_scl}, ${domain_status_ufh}, "Other") ;;
   }
+
+  measure: domains_unique {
+    label: "# Domains - Unique"
+    description: "Total number of unique domains"
+
+    type: count_distinct
+    value_format_name: decimal_0
+
+    sql: ${domain} ;;
+  }
 }
