@@ -45,6 +45,14 @@ view: mx_auction_insights {
     sql: SAFE_DIVIDE(${overlap_search_num}, ${impr_sum_client}) ;;
   }
 
+  measure: impr_share_overlap {
+    label: "% Impr/Overlaps"
+    type: number
+    value_format_name: percent_1
+
+    sql: SAFE_DIVIDE(${overlap_search_num}, ${impr_sum_client}) ;;
+  }
+
   measure: share_outranking {
     label: "% Outranking"
     type: number
