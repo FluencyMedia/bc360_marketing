@@ -97,6 +97,16 @@ view: mx_auction_insights {
     sql: SAFE_DIVIDE(${share_impr_search_numerator}, ${share_impr_search_denom}) ;;
   }
 
+  measure: overlaps_per_domain {
+    label: "# Overlaps/Domain"
+    description: "Total Overlaps per _unique_ Domain"
+
+    type: number
+    value_format_name: decimal_1
+
+    sql: SAFE_DIVIDE(${overlap_search_num}, ${fact_domains.domains_unique}) ;;
+  }
+
   ####### AGGREGATE RATE MEASURES } #######
 
 
