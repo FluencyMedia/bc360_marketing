@@ -10,6 +10,7 @@ view: mx_marketing_base {
             ROW_NUMBER() OVER () row_id,
              CAST(date AS DATE) date,
              timestamp,
+             CAST(source AS STRING) source,
              CAST(medium AS STRING) medium,
              CAST(adgroup_id AS INT64) adgroup_id,
              CAST(outcome_tracker_id AS INT64) outcome_tracker_id,
@@ -378,6 +379,17 @@ view: mx_marketing_base {
         }
         else: "[Unknown Device]"
       }
+    }
+
+    dimension: source {
+      view_label: "3. Channel"
+      label: "Source"
+      description: "BigQuery | Adjustments | Display | ..."
+
+      hidden:  no
+      type: string
+
+      sql: ${TABLE}.source ;;
     }
 
     dimension: final_url {
